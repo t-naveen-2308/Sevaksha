@@ -7,7 +7,7 @@ interface Props {
     setTheme: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Header({ setTheme }: Props) {
+function UserHeader({ setTheme }: Props) {
     const location = useLocation();
     const [themeLis, setThemeLis] = useState<[string, string]>(["", ""]);
 
@@ -34,7 +34,7 @@ function Header({ setTheme }: Props) {
             >
                 <div className="mx-auto flex justify-between items-center w-11/12">
                     <NavLink
-                        to={`/home`}
+                        to={`/user/home`}
                         className="ml-5"
                     >
                         <img
@@ -79,7 +79,7 @@ function Header({ setTheme }: Props) {
                             className={
                                 "nav-item btn btn-ghost px-3 text-lg "
                             }
-                            to={`/home`}
+                            to={`/user/home`}
                         >
                             Home
                         </NavLink>
@@ -87,23 +87,18 @@ function Header({ setTheme }: Props) {
                             className={
                                 "nav-item btn btn-ghost px-3 text-lg "
                             }
-                            to={`/schemes`}
+                            to={`/user/my-applications`}
                         >
-                            Schemes
+                            My Applications
                         </NavLink>
-                        <NavLink
-                            className={
-                                "nav-item btn btn-ghost px-3 text-lg " +
-                                (["/login", "/register"].some(
-                                    (path) => path === location.pathname
-                                )
-                                    ? "active"
-                                    : "")
-                            }
-                            to="/login"
-                        >
-                            Login
-                        </NavLink>
+                            <NavLink
+                                className={
+                                    "nav-item btn btn-ghost px-3 text-lg "
+                                }
+                                to="/user/account"
+                            >
+                                Account
+                            </NavLink>
                     </div>
                     <label className="swap swap-rotate ml-3 ">
                         <input
@@ -139,4 +134,4 @@ function Header({ setTheme }: Props) {
     );
 }
 
-export default Header;
+export default UserHeader;

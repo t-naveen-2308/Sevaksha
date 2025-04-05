@@ -28,12 +28,12 @@ function Login({}: Props) {
     const formSubmit = async (data: Partial<User>) => {
         try {
             const mainAxios = createAxios("");
-            const res = await mainAxios.post("/login", data);
-            const { user, token } = res.data;
-            localStorage.setItem("token", token);
-            const actionObj = userPromise(token);
-            dispatch(actionObj);
-            navigate(`/${user.role}/sections`);
+            // const res = await mainAxios.post("/login", data);
+            // const { user, token } = res.data;
+            // localStorage.setItem("token", token);
+            // const actionObj = userPromise(token);
+            // dispatch(actionObj);
+            navigate(`/user/home`);
         } catch (err) {
             console.log(err);
         }

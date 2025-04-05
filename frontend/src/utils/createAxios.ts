@@ -7,7 +7,7 @@ interface ApiResponse {
 }
 
 function createAxios(
-    role: "librarian" | "user" | "common" | "" = "",
+    role: "user" | "" = "",
     token: string = ""
 ): AxiosInstance {
     const baseURL = import.meta.env.VITE_API_BASE_URL;

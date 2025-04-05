@@ -3,19 +3,15 @@ import {
     RouterProvider,
     Navigate
 } from "react-router-dom";
+import { Layout, Login, Home, Schemes } from "./components/common";
 import {
-    Layout,
-    Login,
-    Sections,
-    Section,
-    Books,
-    Book,
-    ViewBook,
-    Statistics,
-    Account,
     AddOrEditUser,
-    ChangePassword
-} from "./components/common";
+    UserHome,
+    MyApplications,
+    Account,
+    ChangePassword,
+    UserLayout
+} from "./components/user";
 import { RedirectIfNotAuthenticated } from "./utils";
 import { useSelector } from "react-redux";
 
@@ -25,32 +21,24 @@ interface Props {
 
 function BrowserRouterProvider({ setTheme }: Props) {
     const user = useSelector((state: RootState) => state.user);
-    const isAuthenticated = user!==null;
+    const isAuthenticated = user !== null;
 
     const BrowserRouter = createBrowserRouter([
         {
             path: "/",
-            element: <Layout to="" setTheme={setTheme} />,
+            element: <Layout setTheme={setTheme} />,
             children: [
                 {
-                    path: "sections",
-                    element: <Sections to="" />
+                    path: "home",
+                    element: <Home />
                 },
                 {
-                    path: "section/:sectionSlug",
-                    element: <Section to="" />
-                },
-                {
-                    path: "books",
-                    element: <Books to="" />
-                },
-                {
-                    path: "section/:sectionSlug/book/:bookSlug",
-                    element: <Book to="" />
+                    path: "schemes",
+                    element: <Schemes />
                 },
                 {
                     path: "register",
-                    element: <AddOrEditUser to="add" to1="user" />
+                    element: <AddOrEditUser to="add" />
                 },
                 {
                     path: "login",
@@ -58,7 +46,42 @@ function BrowserRouterProvider({ setTheme }: Props) {
                 },
                 {
                     path: "",
-                    element: <Navigate to="sections" />
+                    element: <Navigate to="home" />
+                }
+            ]
+        },
+        {
+            path: "/user",
+            element: (
+                <RedirectIfNotAuthenticated
+                    component={<UserLayout setTheme={setTheme} />}
+                    isAuthenticated={isAuthenticated}
+                />
+            ),
+            children: [
+                {
+                    path: "home",
+                    element: <UserHome />
+                },
+                {
+                    path: "my-applications",
+                    element: <MyApplications />
+                },
+                {
+                    path: "account",
+                    element: <Account />
+                },
+                {
+                    path: "edit",
+                    element: <AddOrEditUser to="edit" />
+                },
+                {
+                    path: "change-password",
+                    element: <ChangePassword />
+                },
+                {
+                    path: "",
+                    element: <Navigate to="home" />
                 }
             ]
         }
