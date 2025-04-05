@@ -1,0 +1,121 @@
+### Create Section - 1
+POST http://localhost:5000/api/librarian/section
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    "title": "Adventure",
+    "description": "This section has adventure category books."
+}
+
+### Create Section - 2
+POST http://localhost:5000/api/librarian/section
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    "title": "Action",
+    "description": "This section has action category books."
+}
+
+### Create Section - 3
+POST http://localhost:5000/api/librarian/section
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    "title": "Sci-Fi",
+    "description": "This section has science fiction category books."
+}
+
+### Create Section - 4
+POST http://localhost:5000/api/librarian/section/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    "title": "New Section",
+    "description": "This section has new section books."
+}
+
+### Update Section
+PUT http://localhost:5000/api/librarian/section/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    "title": "Adventure",
+    "description": "This section has adventure category books.",
+    "delete_picture": "no"
+}
+
+### Delete Section
+DELETE  http://localhost:5000/api/librarian/section/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+### Create Book - 1
+POST http://localhost:5000/api/librarian/book/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    "title": "Jungle Book",
+    "author": "JK Rowling",
+    "description": "This book is about a boy who grows in jungle."
+}
+
+### Create Book - 2
+POST http://localhost:5000/api/librarian/book/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    "title": "Mission Impossible",
+    "author": "Christopher Nolan",
+    "description": "This book is about missions which are impossible to do."
+}
+
+### Update Book
+PUT  http://localhost:5000/api/librarian/book/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    "author": "J. K. Rowling"
+}
+
+### Delete Book
+DELETE  http://localhost:5000/api/librarian/book/:bookSlug
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+### Read Requests and Issued Books 
+GET http://localhost:5000/api/librarian/requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+
+### Update Request - Accepted
+PUT http://localhost:5000/api/librarian/request/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    "status": "accepted"
+}
+
+### Update Request - Rejected
+PUT http://localhost:5000/api/librarian/request/:requestSlug
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    "status": "rejected"
+}
+
+### Update Issued Book
+PUT http://localhost:5000/api/librarian/issued-book/:issuedBookSlug
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImV4cCI6MTcyMzUxMTgwOX0.rqTgwL9l9kXPISdWs_B1V7Zc232cJlKNj2J0jAhLqQk
+
+{
+    // Empty
+}

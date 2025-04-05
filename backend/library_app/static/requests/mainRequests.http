@@ -1,0 +1,52 @@
+### Create User
+POST http://localhost:5000/api/main/register
+Content-Type: application/json
+
+{
+    "name": "Library User",
+    "username": "library_user",
+    "email": "naveentummala2308@gmail.com",
+    "password": "LibraryUser@2024"
+}
+
+### Login Librarian
+POST http://localhost:5000/api/main/login
+Content-Type: application/json
+
+{
+    "username": "library_admin",
+    "password": "LibraryAdmin@2024",
+    "role": "librarian"
+}
+
+### Login User
+POST http://localhost:5000/api/main/login
+Content-Type: application/json
+
+{
+    "username": "library_user",
+    "password": "LibraryUser@2024"
+}
+
+### Read Sections
+GET http://localhost:5000/api/main/sections
+
+### Read Section
+GET http://localhost:5000/api/main/section/2
+
+### Read Books
+GET http://localhost:5000/api/main/books
+
+### Read Book
+GET http://localhost:5000/api/main/book/:bookid
+
+### Cache Demo
+GET http://localhost:5000/cache-demo
+
+### Search
+POST http://localhost:5000/api/main/search
+Content-Type: application/json
+
+{
+  "search_term": "a "
+}

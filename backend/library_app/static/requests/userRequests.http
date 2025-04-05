@@ -1,0 +1,45 @@
+### Create Request
+POST http://localhost:5000/api/user/request/1
+Content-Type: application/json
+Authorization: Bearer token
+
+{
+    "days": 6
+}
+
+### Delete Request
+DELETE http://localhost:5000/api/user/request/1
+Authorization: Bearer token
+
+### Read Requests and Issued Books
+GET http://localhost:5000/api/user/mybooks
+Authorization: Bearer token
+
+### Update Issued Book
+PUT http://localhost:5000/api/user/issued-book/:issueid
+Content-Type: application/json
+Authorization: Bearer token
+
+{
+    // Empty
+}
+
+### Create Feedback
+POST http://localhost:5000/api/user/feedback/:bookid
+Content-Type: application/json
+Authorization: Bearer token
+
+{
+    "rating": 3,
+    "content": "This book is good and I enjoyed reading it."
+}
+
+### Update Feedback
+PUT http://localhost:5000/api/user/feedback/:feedbackid
+Content-Type: application/json
+Authorization: Bearer token
+
+{
+    "rating": 4,
+    "content": "This book is good and I enjoyed reading it."
+}
