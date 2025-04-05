@@ -292,37 +292,3 @@ def requests():
         ),
         200,
     )
-
-
-@librarian.route("/request/<int:requestid>", methods=["PUT"])
-def update_request(requestid):
-    if not request.is_json:
-        return jsonify({"error": "Request must be JSON"}), 400
-    data = request.get_json()
-    status = data.get("status")
-    if not status:
-        return jsonify({"error": "Status should be there"}), 400
-    if status not in ["accepted", "rejected"]:
-        return jsonify({"error": "Invalid status"}), 400
-    user_request = Request.query.get(requestid)
-    if not user_request:
-        return jsonify({"error": "Request not found"}), 404
-    if user_request.status != "pending":
-        return (
-            jsonify({"error": f"The request has already been {user_request.status}."}),
-            400,
-        )
-    user_request.status = status
-    if status == "accepted":
-        issuedbook = IssuedBook(
-            userid=user_request.userid,
-            bookid=user_request.bookid,
-            from_date=datetime.now(ist).replace(tzinfo=None),
-            to_date=(
-                datetime.now(ist).replace(tzinfo=None)
-                + timedelta(days=user_request.days)
-            ),
-        )
-        db.session.add(issuedbook)
-    db.session.commit()
-    return jsonify({"message": f"The Request has been {status}."}), 200
