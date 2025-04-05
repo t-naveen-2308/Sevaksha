@@ -41,26 +41,32 @@ function Login({}: Props) {
 
     return (
         <>
-            <div className="content-section width-45 mx-auto pt-4 pb-4 px-5 mt-28 text-center">
-                <h1 className="text-4xl">Login</h1>
-                <hr className="border-t-1 border-base-content mt-3 mb-4 mx-4" />
-                <form
-                    noValidate
-                    className="mx-auto"
-                    onSubmit={handleSubmit(formSubmit)}
-                >
-                    <div className="mt-8 flex justify-center">
-                        <label
-                            htmlFor="username"
-                            className="text-2xl mr-4 mt-1"
-                        >
-                            Username:
-                        </label>
-                        <div className="flex-col w-2/3">
+            <div className="flex justify-center items-center min-h-screen bg-gray-100">
+                <div className="content-section w-full max-w-lg mx-auto pt-3 pb-3 px-4 rounded-lg shadow-lg bg-white">
+                    <div className="flex justify-center mb-4">
+                        <img src="src/assets/Logo.png" alt="Sevaksha Logo" className="h-20" />
+                    </div>
+                    <h1 className="text-3xl font-bold text-center text-indigo-900">LOGIN </h1>
+                    {/* <p className="text-center text-gray-600 mt-2">Unified Government Welfare Scheme Portal</p> */}
+                    <hr className="border-t-1 border-black-400 mt-4 mb-6" />
+                    
+                    <form
+                        noValidate
+                        className="mx-auto"
+                        onSubmit={handleSubmit(formSubmit)}
+                    >
+                        <div className="mb-6">
+                            <label
+                                htmlFor="username"
+                                className="block text-indigo-900 text-lg font-medium mb-2"
+                            >
+                                Username
+                            </label>
                             <input
                                 type="text"
-                                className="input text-xl w-full input-md border-2 input-bordered"
+                                className="input w-full text-lg p-3 border-2 rounded-md border-gray-300 focus:border-orange-400 focus:outline-none"
                                 maxLength={32}
+                                placeholder="Enter your username"
                                 {...register(
                                     "username",
                                     textValidationMessages(
@@ -72,24 +78,23 @@ function Login({}: Props) {
                                 )}
                             />
                             {errors.username && (
-                                <p className="text-red-500 mt-2 text-base ml-1 text-start">
+                                <p className="text-red-500 mt-2 text-sm">
                                     {(errors.username as FieldError).message}
                                 </p>
                             )}
                         </div>
-                    </div>
-                    <div className="mt-8 flex justify-center">
-                        <label
-                            htmlFor="password"
-                            className="text-2xl mr-4 mt-1 ml-1"
-                        >
-                            Password:
-                        </label>
-                        <div className="flex-col w-2/3 ml-1">
+                        <div className="mb-4">
+                            <label
+                                htmlFor="password"
+                                className="block text-indigo-900 text-lg font-medium mb-2"
+                            >
+                                Password
+                            </label>
                             <input
                                 type="password"
-                                className="input w-full text-xl input-md border-2 input-bordered"
+                                className="input w-full text-lg p-3 border-2 rounded-md border-gray-300 focus:border-orange-400 focus:outline-none"
                                 maxLength={60}
+                                placeholder="Enter your password"
                                 {...register(
                                     "password",
                                     textValidationMessages(
@@ -101,36 +106,38 @@ function Login({}: Props) {
                                 )}
                             />
                             {errors.password && (
-                                <p className="text-red-500 mt-2 text-base ml-1 text-start">
+                                <p className="text-red-500 mt-2 text-sm">
                                     {(errors.password as FieldError).message}
                                 </p>
                             )}
                         </div>
-                    </div>
-                    <NavLink
-                        className="block text-lg text-start ml-10 mt-5  text-blue-600"
-                        to="/reset-password"
-                    >
-                        Forgot Password?
-                    </NavLink>
-                    <div className="flex justify-center w-5/6 mx-auto mt-2 mb-4">
-                        <div className="col-md-6 text-end">
+                        <div className="flex justify-end mb-6">
+                            <NavLink
+                                className="text-orange-500 hover:text-orange-600 text-sm font-medium"
+                                to="/reset-password"
+                            >
+                                Forgot Password?
+                            </NavLink>
+                        </div>
+                        <div className="flex justify-center">
                             <button
-                                className="btn btn-success text-lg"
+                                className="btn w-full py-3 bg-indigo-900 hover:bg-indigo-800 text-white text-lg font-medium rounded-md transition-colors"
                                 type="submit"
                             >
-                                <i className="bi bi-box-arrow-in-right text-xl"></i>
                                 Login
                             </button>
                         </div>
-                    </div>
-                    <NavLink
-                        className="block text-start ml-10 text-lg mt-5 mb-5  text-blue-600"
-                        to="/register"
-                    >
-                        Don't have an Account?
-                    </NavLink>
-                </form>
+                        <div className="mt-6 text-center">
+                            <span className="text-gray-600">Don't have an account? </span>
+                            <NavLink
+                                className="text-orange-500 hover:text-orange-600 font-medium"
+                                to="/register"
+                            >
+                                Register Now
+                            </NavLink>
+                        </div>
+                    </form>
+                </div>
             </div>
         </>
     );

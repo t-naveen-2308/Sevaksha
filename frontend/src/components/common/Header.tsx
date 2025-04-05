@@ -1,140 +1,158 @@
 import { NavLink, useLocation } from "react-router-dom";
-import libraryLogo from "../../assets/libraryLogo.png";
-import libraryLogoDark from "../../assets/libraryLogoDark.png";
-import { useEffect, useState } from "react";
+import sevakshaLogo from "../../assets/Logo.png"; // Update path to your Sevaksha logo
+import { useState, useEffect } from "react";
 
-interface Props {
-    setTheme: React.Dispatch<React.SetStateAction<string>>;
-}
+interface Props {}
 
-function Header({ setTheme }: Props) {
+function Header({}: Props) {
     const location = useLocation();
-    const [themeLis, setThemeLis] = useState<[string, string]>(["", ""]);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [searchFocused, setSearchFocused] = useState(false);
+    
+    // Sevaksha color theme
+    const navyBlue = "#1e2761"; // Dark navy for primary elements
+    const orange = "#f8991d";   // Orange/gold for accents
 
+    // Handle scroll effect
     useEffect(() => {
-        if (localStorage.getItem("theme") === "dark") {
-            setThemeLis(["swap-on", "swap-off"]);
-        } else {
-            setThemeLis(["swap-off", "swap-on"]);
-        }
+        const handleScroll = () => {
+            if (window.scrollY > 20) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+        
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
         <>
-            <p>&nbsp;</p>
             <div
-                className={
-                    "fixed flex items-center top-0 h-20 z-50 w-full " +
-                    (localStorage.getItem("theme") &&
-                    localStorage.getItem("theme") === "light"
-                        ? "bg-base-100"
-                        : "bg-base-200")
-                }
-                style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+                className={`fixed flex items-center top-0 h-20 z-50 w-full transition-all duration-300 ${
+                    isScrolled ? 'h-16' : 'h-20'
+                }`}
+                style={{ 
+                    boxShadow: isScrolled 
+                        ? "rgba(0, 0, 0, 0.1) 0px 4px 12px" 
+                        : "rgba(0, 0, 0, 0.05) 0px 2px 8px",
+                    backgroundColor: "#ffffff"
+                }}
             >
                 <div className="mx-auto flex justify-between items-center w-11/12">
                     <NavLink
                         to={`/home`}
-                        className="ml-5"
+                        className="ml-5 flex items-center"
                     >
                         <img
-                            className="h-12 ml-1"
-                            src={
-                                localStorage.getItem("theme") &&
-                                localStorage.getItem("theme") === "light"
-                                    ? libraryLogo
-                                    : libraryLogoDark
-                            }
-                            alt="Library Logo"
+                            className={`transition-all duration-300 ${isScrolled ? 'h-12' : 'h-16'} ml-5`}
+                            src={sevakshaLogo}
+                            alt="Sevaksha Logo"
                         />
+                        <span 
+                            className="ml-3 font-bold text-2xl" 
+                            style={{ color: navyBlue }}
+                        >
+                            Sevaksha
+                        </span>
                     </NavLink>
-                    <div className="w-full max-w-md mx-auto">
+                    
+                    <div className={`w-full max-w-md mx-auto transition-all duration-300 ${
+                        searchFocused ? 'scale-105' : 'scale-100'
+                    }`}>
                         <form className="search-form" action="" method="POST">
-                            <div className="flex">
+                            <div className="flex relative">
                                 <input
                                     name="search_term"
-                                    className="input input-md text-lg input-bordered border-2 border-r-0 w-full"
+                                    className="input input-md text-lg border-2 w-full pr-12"
                                     type="search"
-                                    placeholder="Search..."
+                                    placeholder="Search welfare schemes..."
                                     aria-label="Search"
                                     maxLength={60}
+                                    onFocus={() => setSearchFocused(true)}
+                                    onBlur={() => setSearchFocused(false)}
                                     style={{
-                                        borderRadius: "0.5rem 0rem 0rem 0.5rem"
+                                        borderRadius: "2rem",
+                                        borderColor: searchFocused ? orange : "#d1d5db",
+                                        transition: "all 0.3s ease",
+                                        outline: "none",
+                                        boxShadow: searchFocused ? `0 0 0 3px ${orange}30` : "none"
                                     }}
                                 />
                                 <button
-                                    className="btn btn-blue"
+                                    className="absolute right-0 h-full px-4 flex items-center justify-center"
                                     type="submit"
                                     style={{
-                                        borderRadius: "0rem 0.5rem 0.5rem 0rem"
+                                        borderRadius: "0 2rem 2rem 0",
+                                        backgroundColor: "transparent",
+                                        color: orange,
+                                        border: "none",
+                                        transition: "all 0.3s ease"
                                     }}
                                 >
-                                    <i className="bi bi-search text-lg"></i>
+                                    <i className="bi bi-search text-xl"></i>
                                 </button>
                             </div>
                         </form>
                     </div>
-                    <div className="navbar-nav flex space-x-1">
+                    
+                    <div className="navbar-nav flex space-x-2">
                         <NavLink
-                            className={
-                                "nav-item btn btn-ghost px-3 text-lg "
+                            className={({ isActive }) => 
+                                `nav-item px-4 py-2 text-lg rounded-lg transition-all duration-200 ease-in-out ${
+                                    isActive ? 'font-bold' : 'font-medium'
+                                }`
                             }
                             to={`/home`}
+                            style={({ isActive }) => ({
+                                backgroundColor: isActive ? `${orange}15` : 'transparent',
+                                color: isActive ? orange : navyBlue,
+                                border: isActive ? `1px solid ${orange}30` : '1px solid transparent',
+                                transform: isActive ? 'translateY(-2px)' : 'translateY(0)',
+                            })}
                         >
+                            <i className="bi bi-house mr-2"></i>
                             Home
                         </NavLink>
                         <NavLink
-                            className={
-                                "nav-item btn btn-ghost px-3 text-lg "
+                            className={({ isActive }) => 
+                                `nav-item px-4 py-2 text-lg rounded-lg transition-all duration-200 ease-in-out ${
+                                    isActive ? 'font-bold' : 'font-medium'
+                                }`
                             }
                             to={`/schemes`}
+                            style={({ isActive }) => ({
+                                backgroundColor: isActive ? `${orange}15` : 'transparent',
+                                color:navyBlue,
+                                border: isActive ? `1px solid ${orange}30` : '1px solid transparent',
+                                transform: isActive ? 'translateY(-2px)' : 'translateY(0)',
+                            })}
                         >
+                            <i className="bi bi-award mr-2"></i>
                             Schemes
                         </NavLink>
                         <NavLink
-                            className={
-                                "nav-item btn btn-ghost px-3 text-lg " +
-                                (["/login", "/register"].some(
-                                    (path) => path === location.pathname
-                                )
-                                    ? "active"
-                                    : "")
+                            className={({ isActive }) => 
+                                `nav-item px-4 py-2 text-lg rounded-lg transition-all duration-200 ease-in-out ${
+                                    isActive ? 'font-bold' : 'font-medium'
+                                }`
                             }
                             to="/login"
+                            style={({ isActive }) => ({
+                                backgroundColor: isActive ? navyBlue : orange,
+                                color: "#ffffff",
+                                transform: isActive ? 'translateY(-2px)' : 'translateY(0)',
+                                boxShadow: isActive ? '0 4px 10px rgba(0,0,0,0.15)' : '0 2px 5px rgba(0,0,0,0.1)'
+                            })}
                         >
+                            <i className="bi bi-person mr-2"></i>
                             Login
                         </NavLink>
                     </div>
-                    <label className="swap swap-rotate ml-3 ">
-                        <input
-                            type="checkbox"
-                            className="theme-controller"
-                            onChange={() => {
-                                const newTheme =
-                                    localStorage.getItem("theme") === "light"
-                                        ? "dark"
-                                        : "light";
-                                setTheme(newTheme);
-                                localStorage.setItem("theme", newTheme);
-                            }}
-                        />
-                        <svg
-                            className={"fill-current w-8 h-8 " + themeLis[0]}
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-                        </svg>
-                        <svg
-                            className={"fill-current w-8 h-8 " + themeLis[1]}
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
-                        </svg>
-                    </label>
                 </div>
             </div>
+            <div style={{ height: "5rem" }}></div> {/* Spacer to prevent content from hiding under fixed header */}
         </>
     );
 }
