@@ -7,7 +7,7 @@ interface ApiResponse {
 }
 
 function createAxios(
-    role: "user" | "" = "",
+    role: "user" | "main" = "main",
     token: string = ""
 ): AxiosInstance {
     const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -24,6 +24,8 @@ function createAxios(
         timeout: timeout,
         headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "true",
+            "User-Agent": "axios-client", 
             Authorization: `Bearer ${token || localStorage.getItem("token") || ""}`
         }
     });
