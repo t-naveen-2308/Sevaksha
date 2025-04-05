@@ -9,7 +9,6 @@ import re
 from sevaksha_app.models import User
 from wtforms.validators import DataRequired
 
-
 class SearchForm(FlaskForm):
     class Meta:
         csrf = False

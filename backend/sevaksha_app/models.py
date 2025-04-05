@@ -2,6 +2,7 @@ import jwt
 from datetime import datetime, timedelta, timezone
 from flask import current_app
 from sevaksha_app import db, bcrypt, ist
+from sqlalchemy import CheckConstraint
 
 
 class User(db.Model):
@@ -15,6 +16,20 @@ class User(db.Model):
         db.String(20), nullable=False, default="default_profile_picture.png"
     )
     authenticated = db.Column(db.Boolean, default=False)
+    age = db.Column(db.Integer, nullable=True)
+    income = db.Column(db.Numeric(10, 2), nullable=True)
+    occupation = db.Column(db.String(100), nullable=True)
+    gender = db.Column(db.String(10), nullable=True)
+    marital_status = db.Column(db.String(20), nullable=True)
+    __table_args__ = (
+        CheckConstraint(
+            "gender IN ('Male', 'Female')", name="check_gender_valid_values"
+        ),
+        CheckConstraint(
+            "marital_status IN ('Never Married', 'Currently Married', 'Widowed', 'Divorced', 'Separated')",
+            name="check_marital_status_valid_values",
+        ),
+    )
 
     def __repr__(self):
         return f"User('{self.userid}', '{self.name}', '{self.username}', '{self.email}', '{self.password}', '{self.profile_picture}', '{self.authenticated}')"
@@ -28,6 +43,11 @@ class User(db.Model):
         profile_picture="default_profile_picture.png",
         authenticated=False,
         urole="user",
+        age=None,
+        income=None,
+        occupation=None,
+        gender=None,
+        marital_status=None,
     ):
         self.name = name
         self.email = email
@@ -36,6 +56,11 @@ class User(db.Model):
         self.profile_picture = profile_picture
         self.authenticated = authenticated
         self.urole = urole
+        self.age = age
+        self.income = income
+        self.occupation = occupation
+        self.gender = gender
+        self.marital_status = marital_status
 
     def get_reset_token(self, expires_sec=1800):
         secret_key = jwt.encode(
@@ -69,6 +94,11 @@ class User(db.Model):
             "username": self.username,
             "email": self.email,
             "profile_picture": self.profile_picture,
+            "age": self.age,
+            "income": float(self.income) if self.income else None,
+            "occupation": self.occupation,
+            "gender": self.gender,
+            "marital_status": self.marital_status,
         }
         return dt
 
@@ -82,6 +112,8 @@ class WelfareScheme(db.Model):
     max_age = db.Column(db.Integer, nullable=True)
     income_limit = db.Column(db.Numeric(10, 2), nullable=True)
     target_occupation = db.Column(db.String(100), nullable=True)
+    gender = db.Column(db.String(10), nullable=True)
+    marital_status = db.Column(db.String(20), nullable=True)
     eligibility_criteria = db.Column(db.Text, nullable=True)
     required_documents = db.Column(db.Text, nullable=True)
     scheme_description = db.Column(db.Text, nullable=True)
@@ -95,6 +127,16 @@ class WelfareScheme(db.Model):
         db.DateTime,
         default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc),
+    )
+    __table_args__ = (
+        CheckConstraint(
+            "gender IN ('Male', 'Female', 'Neutral')",
+            name="check_gender_valid_values",
+        ),
+        CheckConstraint(
+            "marital_status IN ('Never Married', 'Currently Married', 'Widowed', 'Divorced', 'Separated')",
+            name="check_marital_status_valid_values",
+        ),
     )
 
     def __init__(
@@ -112,6 +154,8 @@ class WelfareScheme(db.Model):
         application_link=None,
         language_support=None,
         is_active=True,
+        gender=None,
+        marital_status=None,
     ):
         self.scheme_name = scheme_name
         self.min_age = min_age
@@ -126,12 +170,15 @@ class WelfareScheme(db.Model):
         self.application_link = application_link
         self.language_support = language_support
         self.is_active = is_active
+        self.gender = gender
+        self.marital_status = marital_status
 
     def __repr__(self):
         return (
             f"WelfareScheme('{self.scheme_id}', '{self.scheme_name}', "
             f"min_age={self.min_age}, max_age={self.max_age}, income_limit={self.income_limit}, "
-            f"target_occupation='{self.target_occupation}', is_active={self.is_active})"
+            f"target_occupation='{self.target_occupation}', gender='{self.gender}', "
+            f"marital_status='{self.marital_status}', is_active={self.is_active})"
         )
 
 

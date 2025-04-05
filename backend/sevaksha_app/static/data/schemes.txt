@@ -1,0 +1,447 @@
+Scheme Name: Pradhan Mantri Shram Yogi Maan-Dhan Yojana (PM-SYM)
+Minimum Age: 18
+Maximum Age: 40
+Income Limit: 15000.0
+Target Occupation: Unorganised Workers
+Eligibility Criteria: Indian citizen; unorganised workers like street vendors, agriculture workers, construction workers, rickshaw pullers, etc.; age between 18-40; monthly income below ₹15,000; not a member of EPFO/ESIC/NPS.
+Required Documents: None
+Scheme Description: Voluntary and contributory pension scheme with 50% contribution matched by Central Government.
+Application Process: Online via https://maandhan.in/maandhan/login
+Benefits: Assured monthly pension of ₹3,000 after 60 years. Spouse eligible for 50% pension after death. ₹6,000/month jointly if both spouses are enrolled.
+Application Link: https://maandhan.in/maandhan/login
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: National Pension Scheme for Traders and The Self-employed Persons (NPS)
+Minimum Age: 18
+Maximum Age: 40
+Income Limit: None
+Target Occupation: Small traders, shopkeepers, restaurant/hotel owners, real estate brokers
+Eligibility Criteria: Indian citizen; not covered under EPFO/ESIC/PM-SYM; annual turnover up to ₹1.5 crore.
+Required Documents: None
+Scheme Description: Voluntary and contributory pension scheme with 50% matching contribution by Central Government.
+Application Process: None
+Benefits: Assured monthly pension of ₹3,000 after 60 years.
+Application Link: None
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)
+Minimum Age: 18
+Maximum Age: 50
+Income Limit: None
+Target Occupation: None
+Eligibility Criteria: Indian citizen; bank account with Aadhaar; age 18-50 years; consent-based auto debit.
+Required Documents: Aadhaar, bank account
+Scheme Description: Life insurance scheme
+Application Process: Linked to bank account
+Benefits: ₹2 lakh on death due to any cause. Premium: ₹436/year.
+Application Link: https://www.jansuraksha.gov.in/Forms-PMJJBY.aspx
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Pradhan Mantri Suraksha Bima Yojana (PMSBY)
+Minimum Age: 18
+Maximum Age: 70
+Income Limit: None
+Target Occupation: None
+Eligibility Criteria: Indian citizen; age 18-70; Aadhaar-linked bank account; auto-debit enabled.
+Required Documents: Aadhaar, bank account
+Scheme Description: Accident insurance scheme
+Application Process: Auto-debit through bank
+Benefits: ₹2 lakh for accidental death/disability; ₹1 lakh for partial disability. Premium: ₹20/year.
+Application Link: https://jansuraksha.gov.in/Forms-PMSBY.aspx
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Atal Pension Yojana
+Minimum Age: 18
+Maximum Age: 40
+Income Limit: None
+Target Occupation: None
+Eligibility Criteria: Indian citizen; Aadhaar-linked bank account; age between 18-40 years.
+Required Documents: Aadhaar, bank account
+Scheme Description: Voluntary pension scheme for unorganised sector workers.
+Application Process: Enrol through bank with Aadhaar-linked account
+Benefits: Pension ranging from ₹1000 to ₹5000/month post-60 years; accumulated sum goes to spouse or nominee after death.
+Application Link: https://www.npscra.nsdl.co.in/nsdl-forms.php
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Public Distribution System (PDS)
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Families below poverty line, casual laborers
+Eligibility Criteria: Indian citizen; below poverty line; no member aged 15-59 or includes a disabled member; casual laborers.
+Required Documents: None
+Scheme Description: Subsidized food grain distribution system.
+Application Process: Apply through state public distribution authority
+Benefits: 35 kg food grains/month for BPL families; 15 kg for others. Enabled as ONORC for migrants.
+Application Link: https://nfsa.gov.in/portal/PDS_page
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Pradhan Mantri Awaas Yojana - Gramin (PMAY-G)
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Rural poor, casual laborers
+Eligibility Criteria: Indian citizen; no member aged 15-59; families with disabled members; casual laborers without permanent job.
+Required Documents: None
+Scheme Description: Housing assistance scheme for rural poor.
+Application Process: Apply via rural development department
+Benefits: ₹1.2 lakh (plains) or ₹1.3 lakh (hills) for house construction.
+Application Link: https://pmayg.nic.in/netiayHome/
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: National Social Assistance Programme (NSAP)
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Elderly or destitute individuals
+Eligibility Criteria: Indian citizen; individuals with little or no means of income or support.
+Required Documents: None
+Scheme Description: Social pension scheme for the elderly and vulnerable.
+Application Process: Apply through local social welfare office
+Benefits: Central assistance ₹300-₹500; total monthly pension ₹1000-₹3000 (incl. state share).
+Application Link: None
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (AB-PMJAY)
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Vulnerable households
+Eligibility Criteria: SC/ST households; no adult male members; beggars or those dependent on alms.
+Required Documents: None
+Scheme Description: Health insurance scheme for secondary and tertiary care.
+Application Process: Apply via health department or online portal
+Benefits: Health coverage of ₹5 lakhs/family/year for hospitalization.
+Application Link: https://tms.pmjay.gov.in/OneTMS/loginnew.htm
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: e-Shram Portal
+Minimum Age: 16
+Maximum Age: 59
+Income Limit: None
+Target Occupation: Unorganised workers
+Eligibility Criteria: Indian citizen; aged 16-59 years; working in unorganised sector (construction, agriculture, domestic work, etc.).
+Required Documents: Aadhaar number, bank account number, mobile number linked with Aadhaar
+Scheme Description: Centralised database and identity card for unorganised workers.
+Application Process: Register online at e-Shram portal
+Benefits: Access to welfare schemes, accidental insurance of ₹2 lakhs under PMSBY.
+Application Link: https://eshram.gov.in/
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Deendayal Antyodaya Yojana - National Urban Livelihoods Mission (DAY-NULM)
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Urban poor, informal sector workers
+Eligibility Criteria: Urban poor including street vendors, homeless, waste pickers, rickshaw pullers, etc.
+Required Documents: None
+Scheme Description: Livelihood and skill development mission for urban poor.
+Application Process: Apply through Urban Local Bodies or Mission offices
+Benefits: Skill training, support for self-employment, affordable credit, and shelters for urban homeless.
+Application Link: https://nulm.gov.in/
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)
+Minimum Age: 18
+Maximum Age: None
+Income Limit: None
+Target Occupation: Rural households, unskilled laborers
+Eligibility Criteria: Indian citizen; age 18+; residing in rural areas and willing to do unskilled manual work.
+Required Documents: Aadhaar, job card
+Scheme Description: Wage employment guarantee scheme.
+Application Process: Apply via Gram Panchayat for job card
+Benefits: 100 days of guaranteed wage employment per year to rural households.
+Application Link: https://nrega.nic.in/
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Deen Dayal Upadhyay - Gramin Kaushalya Yojana (DDU-GKY)
+Minimum Age: 15
+Maximum Age: 35
+Income Limit: None
+Target Occupation: Rural youth
+Eligibility Criteria: Indian citizen; aged 15-35 (relaxed to 45 for women and vulnerable groups).
+Required Documents: None
+Scheme Description: Skills rural youth who are poor and provides them with jobs with regular wages.
+Application Process: None
+Benefits: Skill training and job placement above or equal to minimum wages.
+Application Link: None
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Never Married
+
+Scheme Name: Garib Kalyan Rozgar Yojana
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Migrants and rural workers
+Eligibility Criteria: Indian citizen; workers in 25 identified sectors such as PM Kusum, cattle/poultry sheds, RURBAN mission, highways, etc.
+Required Documents: None
+Scheme Description: Rural employment initiative for migrants and unskilled workers.
+Application Process: None
+Benefits: Employment for 125 days.
+Application Link: None
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Deen Dayal Upadhyaya Antyodaya Yojana (DAY)
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Urban and rural poor
+Eligibility Criteria: Indian citizen intending to receive skill training.
+Required Documents: None
+Scheme Description: Provides skill development and self-employment support to poor individuals.
+Application Process: Apply through official DAY portal or local implementation agencies.
+Benefits: Skill enhancement and financial support for business setup.
+Application Link: https://aajeevika.gov.in/
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: PM SVANidhi
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Urban street vendors
+Eligibility Criteria: Indian citizen; street vendor with Certificate of Vending/ID from ULB; or identified in survey without certificate.
+Required Documents: Certificate of Vending or recognized survey record
+Scheme Description: Micro-credit scheme for street vendors.
+Application Process: Apply online through PM SVANidhi portal.
+Benefits: Working capital loan up to ₹10,000; incentives for repayment and digital transactions.
+Application Link: http://pmsvanidhi.mohua.gov.in/login
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Pradhan Mantri Kaushal Vikas Yojana (PMKVY)
+Minimum Age: 18
+Maximum Age: 45
+Income Limit: None
+Target Occupation: Youth, dropouts
+Eligibility Criteria: Indian citizen; 10th pass or 12th dropout; aged 18-45.
+Required Documents: None
+Scheme Description: Skill training and certification scheme for youth.
+Application Process: Enrol via PMKVY official website or Skill India centres.
+Benefits: Skill training, certification, support for private sector participation; targets 8 lakh youth (2020-21).
+Application Link: https://www.pmkvyofficial.org/
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Never Married
+
+Scheme Name: Prime Minister Employment Generation Programme (PMEGP)
+Minimum Age: 18
+Maximum Age: None
+Income Limit: None
+Target Occupation: Prospective entrepreneurs
+Eligibility Criteria: Indian citizen; minimum 8th pass for projects above ₹10 lakh (manufacturing) and ₹5 lakh (services).
+Required Documents: None
+Scheme Description: Provides financial assistance to set up new enterprises.
+Application Process: Apply online through the PMEGP portal.
+Benefits: Financial assistance to start a business in manufacturing or services.
+Application Link: https://www.kviconline.gov.in/pmegpeportal/jsp/pmegponline.jsp
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Assistance to Ex-Servicemen in Penury
+Minimum Age: 65
+Maximum Age: None
+Income Limit: None
+Target Occupation: Non-pensioner Ex-Servicemen up to the rank of Havildar
+Eligibility Criteria: Non-pensioners up to the rank of Havildar (or equivalent in Navy/Air Force), aged 65 and above, not receiving any pension
+Required Documents: None
+Scheme Description: Provides monthly assistance to elderly ex-servicemen not receiving a pension.
+Application Process: None
+Benefits: Rs. 4,000 per month for life
+Application Link: https://www.desw.gov.in/welfareschemes/penuary
+Language Support: None
+Is Active: True
+Gender: Male
+Marital Status: Neutral
+
+Scheme Name: Assistance for Education of Children/Widows of ESM
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Children/Widows of ESM
+Eligibility Criteria: Children of ESM up to the rank of Havildar (or equivalent in Navy/Air Force)
+Required Documents: None
+Scheme Description: Financial support for education of dependent children of ESM.
+Application Process: None
+Benefits: Rs. 1,000 per month per child (paid annually)
+Application Link: https://www.desw.gov.in/welfareschemes/rmewf-financial-assistance-education-childrenwidows-esm
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Assistance to 100% Disabled Children of ESM
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: 100% Disabled Children of ESM
+Eligibility Criteria: Children of ESM up to the rank of Havildar (or equivalent in Navy/Air Force) with 100% disability
+Required Documents: None
+Scheme Description: Monthly financial aid to fully disabled children of ESM.
+Application Process: None
+Benefits: Rs. 3,000 per month
+Application Link: https://www.desw.gov.in/Welfareschemes/rmewf-financial-assistance-100-disabled-child-esm
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Assistance for Marriage of Daughters of ESM/Remarriage of Widows
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Daughters/Widows of ESM
+Eligibility Criteria: ESM up to the rank of Havildar (or equivalent in Navy/Air Force)
+Required Documents: None
+Scheme Description: One-time financial support for marriage of daughters or remarriage of widows.
+Application Process: None
+Benefits: Rs. 50,000 per daughter and Rs. 50,000 for widow remarriage
+Application Link: https://www.desw.gov.in/Welfareschemes/rmewf-financial-assistance-marriage-esm-daughters
+Language Support: None
+Is Active: True
+Gender: Female
+Marital Status: Widowed
+
+Scheme Name: Assistance to Non-Pensioner ESM for Medical Treatment
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Non-pensioner ESM
+Eligibility Criteria: Non-pensioners up to the rank of Havildar (or equivalent in Navy/Air Force)
+Required Documents: None
+Scheme Description: Annual reimbursement for basic medical expenses.
+Application Process: None
+Benefits: Maximum of Rs. 50,000 per year
+Application Link: https://www.desw.gov.in/Welfareschemes/rmewf-financial-assistance-non-pensioner-esm-medical-treatment-rank
+Language Support: None
+Is Active: True
+Gender: Male
+Marital Status: Neutral
+
+Scheme Name: Assistance to Orphan Children of ESM
+Minimum Age: None
+Maximum Age: 21
+Income Limit: None
+Target Occupation: Orphan sons and unmarried daughters of ESM
+Eligibility Criteria: All ranks
+Required Documents: None
+Scheme Description: Monthly aid for orphaned children of ESM.
+Application Process: None
+Benefits: Rs. 3,000 per month
+Application Link: https://www.desw.gov.in/Welfareschemes/zila-sainik-welfare-officeszila-sainik-boards
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Never Married
+
+Scheme Name: Assistance for Vocational Training of Widows of ESM
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Widows of ESM
+Eligibility Criteria: ESM widows up to the rank of Havildar (or equivalent in Navy/Air Force)
+Required Documents: None
+Scheme Description: One-time assistance for vocational skill development after course completion.
+Application Process: None
+Benefits: Up to Rs. 50,000 (on successful completion)
+Application Link: https://www.desw.gov.in/Welfareschemes/advertisement-and-application-form-reserved-defence-seats-medicaldental-colleges
+Language Support: None
+Is Active: True
+Gender: Female
+Marital Status: Widowed
+
+Scheme Name: Assistance for Treatment of Serious Diseases
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: ESM/Widows
+Eligibility Criteria: Non-pensioners across all ranks
+Required Documents: None
+Scheme Description: Financial help for costly treatments such as cancer, dialysis, joint replacement.
+Application Process: None
+Benefits: Up to Rs. 1,50,000 per year (Rs. 75,000 for cancer and dialysis)
+Application Link: https://www.desw.gov.in/Welfareschemes/how-send-donations-armed-forces-flag-day-fund
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral
+
+Scheme Name: Assistance for Procurement of Mobility Equipment for Disabled ESM
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: Disabled ESM
+Eligibility Criteria: All ranks, with 50% or more disability post-retirement
+Required Documents: None
+Scheme Description: Financial assistance to procure mobility equipment like wheelchairs.
+Application Process: None
+Benefits: Maximum of Rs. 1,00,000 per ESM
+Application Link: https://www.desw.gov.in/Welfareschemes/affdf-financial-assistance-procurement-mobility-equipment-disabled-esmall-ranks
+Language Support: None
+Is Active: True
+Gender: Male
+Marital Status: Neutral
+
+Scheme Name: Assistance as Interest Subsidy on Home Loan to ESM
+Minimum Age: None
+Maximum Age: None
+Income Limit: None
+Target Occupation: War-bereaved families, war-disabled, peacetime casualties
+Eligibility Criteria: War-bereaved families, war-disabled individuals, and attributable peacetime casualties
+Required Documents: None
+Scheme Description: Interest subsidy for home loans to select ESM categories.
+Application Process: None
+Benefits: Subsidy on loan up to Rs. 1,00,000
+Application Link: http://desw.gov.in/Welfareschemes/affdf-financial-assistance-interest-subsidy-home-loan-esm
+Language Support: None
+Is Active: True
+Gender: Neutral
+Marital Status: Neutral

@@ -12,11 +12,64 @@ from sevaksha_app.main.forms import (
     ResetPasswordForm,
     LoginForm,
     RegistrationForm,
+    SearchForm,
 )
 from . import main
 from datetime import datetime, timezone, timedelta
 import jwt
 import os
+from sevaksha_app.rag.qa_chain import create_qa_chain
+import jwt
+
+
+qa_chain = create_qa_chain()
+
+
+@main.route("/search", methods=["POST"])
+def search():
+    if not request.is_json:
+        return jsonify({"error": "Request must be JSON"}), 400
+
+    form = SearchForm(data=request.get_json())
+    if not form.validate():
+        return jsonify({"error": form_errors(form.errors)}), 400
+
+    response_text = qa_chain.run(form.search_term.data).strip()
+
+    if "couldn't find any scheme" in response_text.lower():
+        return jsonify({"results": None}), 200
+    
+    scheme_names = [
+        line.lstrip("- ").strip()
+        for line in response_text.splitlines()
+        if line.startswith("- ")
+    ]
+
+    schemes = WelfareScheme.query.filter(
+        WelfareScheme.scheme_name.in_(scheme_names)
+    ).all()
+
+    result = []
+    for scheme in schemes:
+        result.append(
+            {
+                "scheme_name": scheme.scheme_name,
+                "min_age": scheme.min_age,
+                "max_age": scheme.max_age,
+                "income_limit": scheme.income_limit,
+                "target_occupation": scheme.target_occupation,
+                "eligibility_criteria": scheme.eligibility_criteria,
+                "required_documents": scheme.required_documents,
+                "scheme_description": scheme.scheme_description,
+                "application_process": scheme.application_process,
+                "benefits": scheme.benefits,
+                "application_link": scheme.application_link,
+                "language_support": scheme.language_support,
+                "is_active": scheme.is_active,
+            }
+        )
+
+    return jsonify({"results": result}), 200
 
 
 @main.route("/register", methods=["POST"])
@@ -59,8 +112,6 @@ def login():
     if "role" not in data:
         return jsonify({"error": "Role is required"}), 400
     form = LoginForm(data=data)
-    print(form.username.data)
-    print(form.password.data)
     if form.validate():
         user = User.query.filter_by(username=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):

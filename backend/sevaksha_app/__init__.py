@@ -40,15 +40,11 @@ def create_app(config_class=Config):
         if os.path.exists(json_path):
             with open(json_path, "r", encoding="utf-8") as f:
                 schemes = json.load(f)
-            print(json_path)
             for scheme_data in schemes:
-                # print(scheme_data) 
                 existing = WelfareScheme.query.filter_by(
                     scheme_name=scheme_data["scheme_name"]
                 ).first()
-                print(existing)
                 if not existing:
-                    print("Hi")
                     scheme = WelfareScheme(
                         scheme_name=scheme_data.get("scheme_name"),
                         min_age=scheme_data.get("min_age"),

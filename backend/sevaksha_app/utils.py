@@ -80,7 +80,6 @@ def login_required():
 
     return wrapper
 
-
 def handle_exceptions(func):
     @wraps(func)
     def wrapper(*args, **kwargs):

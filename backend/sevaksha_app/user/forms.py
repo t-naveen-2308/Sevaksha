@@ -9,6 +9,13 @@ import re
 from sevaksha_app.models import User
 from wtforms.validators import DataRequired, Length, EqualTo
 
+class ChatForm(FlaskForm):
+    class Meta:
+        csrf = False
+
+    query = StringField("Query", validators=[DataRequired()])
+
+
 class UpdateProfileForm(FlaskForm):
     class Meta:
         csrf = False

@@ -30,3 +30,11 @@ Content-Type: application/json
 
 ### Get All Schemes
 GET https://7a79-103-248-208-101.ngrok-free.app/api/main/schemes
+
+### Get All Schemes by Category
+POST http://localhost:5000/api/main/search
+Content-Type: application/json
+
+{
+    "search_term": "Widow"
+}

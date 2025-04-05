@@ -27,7 +27,7 @@ function Login({}: Props) {
 
     const formSubmit = async (data: Partial<User>) => {
         try {
-            const mainAxios = createAxios("");
+            const mainAxios = createAxios("main");
             // const res = await mainAxios.post("/login", data);
             // const { user, token } = res.data;
             // localStorage.setItem("token", token);

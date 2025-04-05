@@ -12,7 +12,9 @@
         "benefits": "Assured monthly pension of ₹3,000 after 60 years. Spouse eligible for 50% pension after death. ₹6,000/month jointly if both spouses are enrolled.",
         "application_link": "https://maandhan.in/maandhan/login",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "National Pension Scheme for Traders and The Self-employed Persons (NPS)",
@@ -27,7 +29,9 @@
         "benefits": "Assured monthly pension of ₹3,000 after 60 years.",
         "application_link": null,
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)",
@@ -42,7 +46,9 @@
         "benefits": "₹2 lakh on death due to any cause. Premium: ₹436/year.",
         "application_link": "https://www.jansuraksha.gov.in/Forms-PMJJBY.aspx",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Pradhan Mantri Suraksha Bima Yojana (PMSBY)",
@@ -57,7 +63,9 @@
         "benefits": "₹2 lakh for accidental death/disability; ₹1 lakh for partial disability. Premium: ₹20/year.",
         "application_link": "https://jansuraksha.gov.in/Forms-PMSBY.aspx",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Atal Pension Yojana",
@@ -72,7 +80,9 @@
         "benefits": "Pension ranging from ₹1000 to ₹5000/month post-60 years; accumulated sum goes to spouse or nominee after death.",
         "application_link": "https://www.npscra.nsdl.co.in/nsdl-forms.php",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Public Distribution System (PDS)",
@@ -87,7 +97,9 @@
         "benefits": "35 kg food grains/month for BPL families; 15 kg for others. Enabled as ONORC for migrants.",
         "application_link": "https://nfsa.gov.in/portal/PDS_page",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Pradhan Mantri Awaas Yojana - Gramin (PMAY-G)",
@@ -102,7 +114,9 @@
         "benefits": "₹1.2 lakh (plains) or ₹1.3 lakh (hills) for house construction.",
         "application_link": "https://pmayg.nic.in/netiayHome/",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "National Social Assistance Programme (NSAP)",
@@ -117,7 +131,9 @@
         "benefits": "Central assistance ₹300-₹500; total monthly pension ₹1000-₹3000 (incl. state share).",
         "application_link": null,
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (AB-PMJAY)",
@@ -132,7 +148,9 @@
         "benefits": "Health coverage of ₹5 lakhs/family/year for hospitalization.",
         "application_link": "https://tms.pmjay.gov.in/OneTMS/loginnew.htm",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "e-Shram Portal",
@@ -147,7 +165,9 @@
         "benefits": "Access to welfare schemes, accidental insurance of ₹2 lakhs under PMSBY.",
         "application_link": "https://eshram.gov.in/",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Deendayal Antyodaya Yojana - National Urban Livelihoods Mission (DAY-NULM)",
@@ -162,7 +182,9 @@
         "benefits": "Skill training, support for self-employment, affordable credit, and shelters for urban homeless.",
         "application_link": "https://nulm.gov.in/",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)",
@@ -177,7 +199,9 @@
         "benefits": "100 days of guaranteed wage employment per year to rural households.",
         "application_link": "https://nrega.nic.in/",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Deen Dayal Upadhyay - Gramin Kaushalya Yojana (DDU-GKY)",
@@ -192,7 +216,9 @@
         "benefits": "Skill training and job placement above or equal to minimum wages.",
         "application_link": null,
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Never Married"
     },
     {
         "scheme_name": "Garib Kalyan Rozgar Yojana",
@@ -207,7 +233,9 @@
         "benefits": "Employment for 125 days.",
         "application_link": null,
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Deen Dayal Upadhyaya Antyodaya Yojana (DAY)",
@@ -222,7 +250,9 @@
         "benefits": "Skill enhancement and financial support for business setup.",
         "application_link": "https://aajeevika.gov.in/",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "PM SVANidhi",
@@ -234,10 +264,12 @@
         "required_documents": "Certificate of Vending or recognized survey record",
         "scheme_description": "Micro-credit scheme for street vendors.",
         "application_process": "Apply online through PM SVANidhi portal.",
-        "benefits": "Working capital loan up to \u20b910,000; incentives for repayment and digital transactions.",
+        "benefits": "Working capital loan up to ₹10,000; incentives for repayment and digital transactions.",
         "application_link": "http://pmsvanidhi.mohua.gov.in/login",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Pradhan Mantri Kaushal Vikas Yojana (PMKVY)",
@@ -252,7 +284,9 @@
         "benefits": "Skill training, certification, support for private sector participation; targets 8 lakh youth (2020-21).",
         "application_link": "https://www.pmkvyofficial.org/",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Never Married"
     },
     {
         "scheme_name": "Prime Minister Employment Generation Programme (PMEGP)",
@@ -260,14 +294,16 @@
         "max_age": null,
         "income_limit": null,
         "target_occupation": "Prospective entrepreneurs",
-        "eligibility_criteria": "Indian citizen; minimum 8th pass for projects above \u20b910 lakh (manufacturing) and \u20b95 lakh (services).",
+        "eligibility_criteria": "Indian citizen; minimum 8th pass for projects above ₹10 lakh (manufacturing) and ₹5 lakh (services).",
         "required_documents": null,
         "scheme_description": "Provides financial assistance to set up new enterprises.",
         "application_process": "Apply online through the PMEGP portal.",
         "benefits": "Financial assistance to start a business in manufacturing or services.",
         "application_link": "https://www.kviconline.gov.in/pmegpeportal/jsp/pmegponline.jsp",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Assistance to Ex-Servicemen in Penury",
@@ -282,7 +318,9 @@
         "benefits": "Rs. 4,000 per month for life",
         "application_link": "https://www.desw.gov.in/welfareschemes/penuary",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Male",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Assistance for Education of Children/Widows of ESM",
@@ -297,7 +335,9 @@
         "benefits": "Rs. 1,000 per month per child (paid annually)",
         "application_link": "https://www.desw.gov.in/welfareschemes/rmewf-financial-assistance-education-childrenwidows-esm",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Assistance to 100% Disabled Children of ESM",
@@ -312,7 +352,9 @@
         "benefits": "Rs. 3,000 per month",
         "application_link": "https://www.desw.gov.in/Welfareschemes/rmewf-financial-assistance-100-disabled-child-esm",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Assistance for Marriage of Daughters of ESM/Remarriage of Widows",
@@ -327,7 +369,9 @@
         "benefits": "Rs. 50,000 per daughter and Rs. 50,000 for widow remarriage",
         "application_link": "https://www.desw.gov.in/Welfareschemes/rmewf-financial-assistance-marriage-esm-daughters",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Female",
+        "marital_status": "Widowed"
     },
     {
         "scheme_name": "Assistance to Non-Pensioner ESM for Medical Treatment",
@@ -342,7 +386,9 @@
         "benefits": "Maximum of Rs. 50,000 per year",
         "application_link": "https://www.desw.gov.in/Welfareschemes/rmewf-financial-assistance-non-pensioner-esm-medical-treatment-rank",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Male",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Assistance to Orphan Children of ESM",
@@ -357,7 +403,9 @@
         "benefits": "Rs. 3,000 per month",
         "application_link": "https://www.desw.gov.in/Welfareschemes/zila-sainik-welfare-officeszila-sainik-boards",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Never Married"
     },
     {
         "scheme_name": "Assistance for Vocational Training of Widows of ESM",
@@ -372,7 +420,9 @@
         "benefits": "Up to Rs. 50,000 (on successful completion)",
         "application_link": "https://www.desw.gov.in/Welfareschemes/advertisement-and-application-form-reserved-defence-seats-medicaldental-colleges",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Female",
+        "marital_status": "Widowed"
     },
     {
         "scheme_name": "Assistance for Treatment of Serious Diseases",
@@ -387,7 +437,9 @@
         "benefits": "Up to Rs. 1,50,000 per year (Rs. 75,000 for cancer and dialysis)",
         "application_link": "https://www.desw.gov.in/Welfareschemes/how-send-donations-armed-forces-flag-day-fund",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Assistance for Procurement of Mobility Equipment for Disabled ESM",
@@ -402,7 +454,9 @@
         "benefits": "Maximum of Rs. 1,00,000 per ESM",
         "application_link": "https://www.desw.gov.in/Welfareschemes/affdf-financial-assistance-procurement-mobility-equipment-disabled-esmall-ranks",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Male",
+        "marital_status": "Neutral"
     },
     {
         "scheme_name": "Assistance as Interest Subsidy on Home Loan to ESM",
@@ -417,6 +471,8 @@
         "benefits": "Subsidy on loan up to Rs. 1,00,000",
         "application_link": "http://desw.gov.in/Welfareschemes/affdf-financial-assistance-interest-subsidy-home-loan-esm",
         "language_support": null,
-        "is_active": true
+        "is_active": true,
+        "gender": "Neutral",
+        "marital_status": "Neutral"
     }
 ]

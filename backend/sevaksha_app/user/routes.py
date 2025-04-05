@@ -1,13 +1,14 @@
 import os
 import jwt
 from flask import jsonify, request
-from sevaksha_app.models import User, BlacklistedToken
+from sevaksha_app.models import User, BlacklistedToken, WelfareScheme
 from sevaksha_app import db, ist
 from sevaksha_app.user.forms import (
     UpdateProfileForm,
     ChangePasswordForm,
     DeleteAccountForm,
     ResetPasswordForm,
+    ChatForm,
 )
 
 from flask import current_app
@@ -21,6 +22,98 @@ from sevaksha_app.utils import (
     validate_file,
 )
 from . import user
+from sevaksha_app.rag.qa_chain import create_qa_chain
+from .user_rag.user_qa_chain import create_user_qa_chain
+import jwt
+import threading
+
+
+qa_chain = create_qa_chain()
+
+user_qa_chain = create_user_qa_chain()
+
+
+@user.route("/recommendation", methods=["POST"])
+def recommendation(userid):
+    if not request.is_json:
+        return jsonify({"error": "Request must be JSON"}), 400
+
+    current_user = User.query.get(userid)
+
+    response_text = qa_chain.run(
+        " ".join(
+            [
+                str(current_user.age),
+                str(current_user.income),
+                current_user.occupation,
+                current_user.gender,
+                current_user.martial_status,
+            ]
+        )
+    )
+
+    if "couldn't find any scheme" in response_text.lower():
+        return jsonify({"results": None}), 200
+
+    scheme_names = [
+        line.lstrip("- ").strip()
+        for line in response_text.splitlines()
+        if line.startswith("- ")
+    ]
+
+    schemes = WelfareScheme.query.filter(
+        WelfareScheme.scheme_name.in_(scheme_names)
+    ).all()
+
+    result = []
+    for scheme in schemes:
+        result.append(
+            {
+                "scheme_name": scheme.scheme_name,
+                "min_age": scheme.min_age,
+                "max_age": scheme.max_age,
+                "income_limit": scheme.income_limit,
+                "target_occupation": scheme.target_occupation,
+                "eligibility_criteria": scheme.eligibility_criteria,
+                "required_documents": scheme.required_documents,
+                "scheme_description": scheme.scheme_description,
+                "application_process": scheme.application_process,
+                "benefits": scheme.benefits,
+                "application_link": scheme.application_link,
+                "language_support": scheme.language_support,
+                "is_active": scheme.is_active,
+            }
+        )
+
+    return jsonify({"results": result}), 200
+
+
+@user.route("/chat", methods=["POST"])
+def chat(userid):
+    if not request.is_json:
+        return jsonify({"error": "Request must be JSON"}), 400
+
+    current_user = User.query.get(userid)
+
+    form = ChatForm(data=request.get_json())
+    if not form.validate():
+        return jsonify({"error": form_errors(form.errors)}), 400
+
+    try:
+        response = qa_chain.run(
+            " ".join(
+                [
+                    str(current_user.age),
+                    str(current_user.income),
+                    current_user.occupation,
+                    current_user.gender,
+                    current_user.martial_status,
+                ]
+            )
+        )
+        return jsonify({"response": response}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 @user.route("/account", methods=["POST"])
