@@ -51,18 +51,19 @@ const SchemeCard: React.FC<SchemeCardProps> = ({ scheme }) => {
       <CardActions>
         {scheme.application_link && (
           <Button 
-            size="small" 
-            color="primary" 
-            href={scheme.application_link}
-            target="_blank"
-            rel="noopener noreferrer"
+          href={scheme.application_link} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-block text-white px-4 py-2 rounded-full text-sm shadow-md transition duration-300"
           >
             Apply Now
           </Button>
         )}
-        <Button size="small" color="primary">
+        <button
+          className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm shadow-md transition duration-300 ml-3"
+          >
           Learn More
-        </Button>
+        </button>
       </CardActions>
     </Card>
   );

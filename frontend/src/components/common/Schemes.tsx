@@ -41,8 +41,26 @@ const Schemes: React.FC = () => {
       {schemes.length > 0 ? (
         <Grid container spacing={3}>
           {schemes.map((scheme) => (
-            <Grid item xs={12} sm={6} md={4} key={scheme.scheme_id}>
+            <Grid 
+              item 
+              xs={12} 
+              sm={6} 
+              md={4} 
+              key={scheme.scheme_id}
+              sx={{
+              transform: 'scale(1)',
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': {
+                transform: 'scale(1.03)',
+                zIndex: 1
+              },
+              display: 'flex',
+              justifyContent: 'center'
+              }}
+            >
+              <Box sx={{ width: '100%', maxWidth: 345 }}>
               <SchemeCard scheme={scheme} />
+              </Box>
             </Grid>
           ))}
         </Grid>

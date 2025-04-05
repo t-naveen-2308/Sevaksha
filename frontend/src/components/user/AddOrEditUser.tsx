@@ -1,7 +1,6 @@
 import {
     textValidationMessages,
-    imageValidationMessages,
-    goBack
+    createAxios
 } from "../../utils";
 import { FieldError, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
@@ -11,10 +10,17 @@ import {
     emailRegex,
     passwordRegex
 } from "../../utils/regex";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 interface Props {
     to: "add" | "edit";
+}
+
+interface User {
+    name: string;
+    username: string;
+    email: string;
+    password: string;
 }
 
 function AddOrEditUser({ to }: Props) {
@@ -23,212 +29,207 @@ function AddOrEditUser({ to }: Props) {
         handleSubmit,
         setValue,
         formState: { errors }
-    } = useForm();
+    } = useForm<User>();
     const [error, setError] = useState<Error | null>(null);
+    const navigate = useNavigate();
 
     if (to === "edit") {
-        useEffect(() => {}, [setValue]);
+        useEffect(() => {
+            // Pre-fill form with existing user data in edit mode
+            // Example:
+            // setValue("name", existingUser.name);
+            // setValue("username", existingUser.username);
+            // setValue("email", existingUser.email);
+        }, [setValue]);
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    Error: {error.message}
+                </div>
+            </div>
+        );
     }
 
-    const formSubmit = (data: Partial<Book>) => {
-        if (to === "edit") {
-        } else {
+    const formSubmit = async (data: User) => {
+        try {
+            const mainAxios = createAxios("");
+            // const res = await mainAxios.post(to === "add" ? "/register" : "/edit-user", data);
+            // Handle success response
+            navigate(to === "add" ? "/login" : "/user/profile");
+        } catch (err) {
+            console.error(err);
+            setError(err as Error);
         }
     };
 
     return (
-        <>
-            <div className="content-section width-60 mx-auto pt-4 pb-4 px-5 text-center">
-                <h1 className="text-3xl">
-                    {`${to === "add" ? "Register" : "Edit"} User`}
+        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+            <div className="content-section w-full max-w-md mx-auto pt-6 pb-8 px-8 rounded-lg shadow-lg bg-white">
+                <div className="flex justify-center mb-4">
+                    <img src="src/assets/Logo.png" alt="Sevaksha Logo" className="h-20" />
+                </div>
+                <h1 className="text-3xl font-bold text-center text-indigo-900">
+                    {to === "add" ? "REGISTER" : "EDIT PROFILE"}
                 </h1>
-                <hr className="border-t-1 border-base-content mt-3 mb-4 mx-4" />
-                <form
-                    noValidate
-                    className="mx-auto"
-                    onSubmit={handleSubmit(formSubmit)}
-                >
-                    <div className="mt-8 flex justify-center">
+            
+                <hr className="border-t-1 border-gray-300 mt-4 mb-6" />
+                
+                <form noValidate onSubmit={handleSubmit(formSubmit)} className="space-y-4">
+                    {/* Name Field */}
+                    <div>
                         <label
                             htmlFor="name"
-                            className="text-2xl mr-4 mt-1 ml-10"
+                            className="block text-indigo-900 text-lg font-medium mb-2"
                         >
-                            Name:
+                            Full Name
                         </label>
-                        <div className="flex-col w-2/3">
-                            <input
-                                type="text"
-                                className="input w-full text-xl input-md border-2 input-bordered"
-                                maxLength={60}
-                                {...register(
-                                    "name",
-                                    textValidationMessages(
-                                        "Name",
-                                        3,
-                                        60,
-                                        nameRegex
-                                    )
-                                )}
-                            />
-                            {errors.name && (
-                                <p className="text-red-500 mt-2 text-base ml-1 text-start">
-                                    {(errors.name as FieldError).message}
-                                </p>
+                        <input
+                            type="text"
+                            id="name"
+                            className="w-full text-lg p-3 border-2 rounded-md border-gray-300 focus:border-orange-400 focus:outline-none"
+                            maxLength={60}
+                            placeholder="Enter your full name"
+                            {...register(
+                                "name",
+                                textValidationMessages(
+                                    "Name",
+                                    3,
+                                    60,
+                                    nameRegex
+                                )
                             )}
-                        </div>
+                        />
+                        {errors.name && (
+                            <p className="text-red-500 mt-2 text-sm">
+                                {(errors.name as FieldError).message}
+                            </p>
+                        )}
                     </div>
-                    <div className="mt-8 flex justify-center">
+
+                    {/* Username Field */}
+                    <div>
                         <label
                             htmlFor="username"
-                            className="text-2xl mr-4 mt-1"
+                            className="block text-indigo-900 text-lg font-medium mb-2"
                         >
-                            Username:
+                            Username
                         </label>
-                        <div className="flex-col w-2/3">
-                            <input
-                                type="text"
-                                className="input w-full text-xl input-md border-2 input-bordered"
-                                maxLength={32}
-                                {...register(
-                                    "username",
-                                    textValidationMessages(
-                                        "Username",
-                                        5,
-                                        32,
-                                        usernameRegex
-                                    )
-                                )}
-                            />
-                            {errors.username && (
-                                <p className="text-red-500 mt-2 text-base ml-1 text-start">
-                                    {(errors.username as FieldError).message}
-                                </p>
+                        <input
+                            type="text"
+                            id="username"
+                            className="w-full text-lg p-3 border-2 rounded-md border-gray-300 focus:border-orange-400 focus:outline-none"
+                            maxLength={32}
+                            placeholder="Choose a username"
+                            {...register(
+                                "username",
+                                textValidationMessages(
+                                    "Username",
+                                    5,
+                                    32,
+                                    usernameRegex
+                                )
                             )}
-                        </div>
+                        />
+                        {errors.username && (
+                            <p className="text-red-500 mt-2 text-sm">
+                                {(errors.username as FieldError).message}
+                            </p>
+                        )}
                     </div>
-                    <div className="mt-8 flex justify-center">
+
+                    {/* Email Field */}
+                    <div>
                         <label
                             htmlFor="email"
-                            className="text-2xl mr-4 mt-1 ml-12"
+                            className="block text-indigo-900 text-lg font-medium mb-2"
                         >
-                            Email:
+                            Email
                         </label>
-                        <div className="flex-col w-2/3">
-                            <input
-                                type="email"
-                                className="input w-full text-xl input-md border-2 input-bordered"
-                                {...register("email", {
-                                    required: `Email is required.`,
-                                    pattern: {
-                                        value: emailRegex,
-                                        message: `Email can only have letters, digits and some special characters.`
-                                    }
-                                })}
-                            />
-                            {errors.email && (
-                                <p className="text-red-500 mt-2 text-base ml-1 text-start">
-                                    {(errors.email as FieldError).message}
-                                </p>
-                            )}
-                        </div>
+                        <input
+                            type="email"
+                            id="email"
+                            className="w-full text-lg p-3 border-2 rounded-md border-gray-300 focus:border-orange-400 focus:outline-none"
+                            placeholder="Enter your email"
+                            {...register("email", {
+                                required: `Email is required.`,
+                                pattern: {
+                                    value: emailRegex,
+                                    message: `Please enter a valid email address.`
+                                }
+                            })}
+                        />
+                        {errors.email && (
+                            <p className="text-red-500 mt-2 text-sm">
+                                {(errors.email as FieldError).message}
+                            </p>
+                        )}
                     </div>
-                    <div className="mt-6 flex justify-center">
-                        <label
-                            htmlFor="profilePicture"
-                            className="text-2xl mr-4 mt-2 ml-10"
-                        >
-                            Image:
-                        </label>
-                        <div className="flex-col w-2/3">
-                            <input
-                                type="file"
-                                className="file-input w-full text-lg file-input-md border-2 file-input-bordered mt-1"
-                                accept="image/png,image/jpeg,image/jpg"
-                                {...register(
-                                    "profilePicture",
-                                    imageValidationMessages()
-                                )}
-                            />
-                            {errors.profilePicture && (
-                                <p className="text-red-500 mt-2 text-base ml-1 text-start">
-                                    {
-                                        (errors.profilePicture as FieldError)
-                                            .message
-                                    }
-                                </p>
-                            )}
-                        </div>
-                    </div>
-                    <div className="mt-8 flex justify-center">
+
+                    {/* Password Field */}
+                    <div>
                         <label
                             htmlFor="password"
-                            className="text-2xl mr-4 mt-1 ml-2"
+                            className="block text-indigo-900 text-lg font-medium mb-2"
                         >
-                            Password:
+                            {to === "add" ? "Create Password" : "New Password"}
                         </label>
-                        <div className="flex-col w-2/3">
-                            <input
-                                type="password"
-                                className="input w-full text-xl input-md border-2 input-bordered"
-                                maxLength={60}
-                                {...register(
-                                    "password",
-                                    textValidationMessages(
-                                        "Password",
-                                        8,
-                                        60,
-                                        passwordRegex
-                                    )
-                                )}
-                            />
-                            {errors.password && (
-                                <p className="text-red-500 mt-2 text-base ml-1 text-start">
-                                    {(errors.password as FieldError).message}
-                                </p>
+                        <input
+                            type="password"
+                            id="password"
+                            className="w-full text-lg p-3 border-2 rounded-md border-gray-300 focus:border-orange-400 focus:outline-none"
+                            maxLength={60}
+                            placeholder={to === "add" ? "Create secure password" : "Enter new password"}
+                            {...register(
+                                "password",
+                                textValidationMessages(
+                                    "Password",
+                                    8,
+                                    60,
+                                    passwordRegex
+                                )
                             )}
-                        </div>
+                        />
+                        {errors.password && (
+                            <p className="text-red-500 mt-2 text-sm">
+                                {(errors.password as FieldError).message}
+                            </p>
+                        )}
                     </div>
-                    <div className="flex justify-between w-5/6 mx-auto mt-10 mb-4">
-                        <div className="col-md-6">
-                            <button
-                                className="btn btn-error text-lg"
-                                onClick={goBack("/librarian/sections")}
-                            >
-                                <i className="bi bi-x-circle"></i>Cancel
-                            </button>
-                        </div>
-                        <div className="col-md-6 text-end">
-                            <button
-                                className="btn btn-success text-lg"
-                                type="submit"
-                            >
-                                <i
-                                    className={
-                                        "bi text-xl " +
-                                        (to === "add"
-                                            ? "bi-person-check"
-                                            : "bi-pencil-square")
-                                    }
-                                ></i>
-                                {to === "add" ? "Register" : "Edit"}
-                            </button>
-                        </div>
-                    </div>
-                    {to === "add" && (
-                        <NavLink
-                            className="block text-lg mt-5 mb-5 text-start ml-14  text-blue-600"
-                            to="/login"
+
+                    {/* Action Buttons */}
+                    <div className="flex justify-between pt-4">
+                        <button
+                            type="button"
+                            onClick={() => navigate(-1)}
+                            className="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 text-lg font-medium rounded-md transition-colors"
                         >
-                            Already have an Account?
-                        </NavLink>
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            className="px-6 py-3 bg-indigo-900 hover:bg-indigo-800 text-white text-lg font-medium rounded-md transition-colors"
+                        >
+                            {to === "add" ? "Register" : "Update Profile"}
+                        </button>
+                    </div>
+
+                    {to === "add" && (
+                        <div className="pt-4 text-center">
+                            <span className="text-gray-600">Already have an account? </span>
+                            <NavLink
+                                className="text-orange-500 hover:text-orange-600 font-medium"
+                                to="/login"
+                            >
+                                Login Now
+                            </NavLink>
+                        </div>
                     )}
                 </form>
             </div>
-        </>
+        </div>
     );
 }
 
