@@ -326,16 +326,3 @@ def update_request(requestid):
         db.session.add(issuedbook)
     db.session.commit()
     return jsonify({"message": f"The Request has been {status}."}), 200
-
-
-@librarian.route("/revoke/<int:issueid>", methods=["GET"])
-def revoke_access(issueid):
-    issuedbook = IssuedBook.query.get(issueid)
-    if not issuedbook:
-        return jsonify({"error": "Issued Book not found."}), 404
-    if issuedbook.status == "returned":
-        return jsonify({"error": f"The book has already been returned."}), 400
-    issuedbook.status = "returned"
-    issuedbook.to_date = datetime.now(ist).replace(tzinfo=None)
-    db.session.commit()
-    return jsonify({"message": "The access has been revoked."}), 200
