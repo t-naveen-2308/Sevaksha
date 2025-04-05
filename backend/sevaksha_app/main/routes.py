@@ -1,6 +1,6 @@
 from flask import jsonify, request, current_app
 from sevaksha_app import db, bcrypt
-from sevaksha_app.models import User
+from sevaksha_app.models import User, WelfareScheme
 from sevaksha_app.utils import (
     save_file,
     send_reset_email,
@@ -8,7 +8,6 @@ from sevaksha_app.utils import (
     validate_file,
 )
 from sevaksha_app.main.forms import (
-    SearchForm,
     ResetRequestForm,
     ResetPasswordForm,
     LoginForm,
@@ -184,3 +183,30 @@ def reset_password(token):
             jsonify({"error": form_errors(form.errors)}),
             400,
         )
+
+
+@main.route("/schemes", methods=["GET"])
+def get_schemes():
+    schemes = WelfareScheme.query.all()
+    schemes_data = [
+        {
+            "scheme_id": scheme.scheme_id,
+            "scheme_name": scheme.scheme_name,
+            "min_age": scheme.min_age,
+            "max_age": scheme.max_age,
+            "income_limit": float(scheme.income_limit) if scheme.income_limit else None,
+            "target_occupation": scheme.target_occupation,
+            "eligibility_criteria": scheme.eligibility_criteria,
+            "required_documents": scheme.required_documents,
+            "scheme_description": scheme.scheme_description,
+            "application_process": scheme.application_process,
+            "benefits": scheme.benefits,
+            "application_link": scheme.application_link,
+            "language_support": scheme.language_support,
+            "is_active": scheme.is_active,
+            "created_at": scheme.created_at.isoformat(),
+            "updated_at": scheme.updated_at.isoformat() if scheme.updated_at else None,
+        }
+        for scheme in schemes
+    ]
+    return jsonify(schemes_data), 200

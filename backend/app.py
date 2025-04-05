@@ -1,5 +1,11 @@
+import os
+from dotenv import load_dotenv
 from sevaksha_app import create_app
 from pyngrok import ngrok
+
+load_dotenv()
+
+ngrok.set_auth_token(os.getenv("NGROK_AUTH_TOKEN"))
 
 app, celery_app = create_app()
 

@@ -28,25 +28,5 @@ Content-Type: application/json
     "password": "LibraryUser@2024"
 }
 
-### Read Sections
-GET http://localhost:5000/api/main/sections
-
-### Read Section
-GET http://localhost:5000/api/main/section/2
-
-### Read Books
-GET http://localhost:5000/api/main/books
-
-### Read Book
-GET http://localhost:5000/api/main/book/:bookid
-
-### Cache Demo
-GET http://localhost:5000/cache-demo
-
-### Search
-POST http://localhost:5000/api/main/search
-Content-Type: application/json
-
-{
-  "search_term": "a "
-}
+### Get All Schemes
+GET https://7a79-103-248-208-101.ngrok-free.app/api/main/schemes

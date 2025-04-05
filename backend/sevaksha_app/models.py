@@ -73,6 +73,68 @@ class User(db.Model):
         return dt
 
 
+class WelfareScheme(db.Model):
+    __tablename__ = "welfare_schemes"
+
+    scheme_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    scheme_name = db.Column(db.String(255), nullable=False)
+    min_age = db.Column(db.Integer, nullable=True)
+    max_age = db.Column(db.Integer, nullable=True)
+    income_limit = db.Column(db.Numeric(10, 2), nullable=True)
+    target_occupation = db.Column(db.String(100), nullable=True)
+    eligibility_criteria = db.Column(db.Text, nullable=True)
+    required_documents = db.Column(db.Text, nullable=True)
+    scheme_description = db.Column(db.Text, nullable=True)
+    application_process = db.Column(db.Text, nullable=True)
+    benefits = db.Column(db.Text, nullable=True)
+    application_link = db.Column(db.String(500), nullable=True)
+    language_support = db.Column(db.String(255), nullable=True)
+    is_active = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = db.Column(
+        db.DateTime,
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
+    )
+
+    def __init__(
+        self,
+        scheme_name,
+        min_age=None,
+        max_age=None,
+        income_limit=None,
+        target_occupation=None,
+        eligibility_criteria=None,
+        required_documents=None,
+        scheme_description=None,
+        application_process=None,
+        benefits=None,
+        application_link=None,
+        language_support=None,
+        is_active=True,
+    ):
+        self.scheme_name = scheme_name
+        self.min_age = min_age
+        self.max_age = max_age
+        self.income_limit = income_limit
+        self.target_occupation = target_occupation
+        self.eligibility_criteria = eligibility_criteria
+        self.required_documents = required_documents
+        self.scheme_description = scheme_description
+        self.application_process = application_process
+        self.benefits = benefits
+        self.application_link = application_link
+        self.language_support = language_support
+        self.is_active = is_active
+
+    def __repr__(self):
+        return (
+            f"WelfareScheme('{self.scheme_id}', '{self.scheme_name}', "
+            f"min_age={self.min_age}, max_age={self.max_age}, income_limit={self.income_limit}, "
+            f"target_occupation='{self.target_occupation}', is_active={self.is_active})"
+        )
+
+
 class BlacklistedToken(db.Model):
     __tablename__ = "blacklistedtoken"
     blacklistedid = db.Column(db.Integer, primary_key=True)
