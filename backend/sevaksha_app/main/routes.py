@@ -2,10 +2,8 @@ from flask import jsonify, request, current_app
 from sevaksha_app import db, bcrypt
 from sevaksha_app.models import User, WelfareScheme
 from sevaksha_app.utils import (
-    save_file,
     send_reset_email,
     form_errors,
-    validate_file,
 )
 from sevaksha_app.main.forms import (
     ResetRequestForm,
@@ -17,9 +15,7 @@ from sevaksha_app.main.forms import (
 from . import main
 from datetime import datetime, timezone, timedelta
 import jwt
-import os
 from sevaksha_app.rag.qa_chain import create_qa_chain
-import jwt
 
 
 qa_chain = create_qa_chain()
@@ -38,7 +34,7 @@ def search():
 
     if "couldn't find any scheme" in response_text.lower():
         return jsonify({"results": None}), 200
-    
+
     scheme_names = [
         line.lstrip("- ").strip()
         for line in response_text.splitlines()
@@ -68,40 +64,55 @@ def search():
                 "is_active": scheme.is_active,
             }
         )
-
+    print(result)
     return jsonify({"results": result}), 200
 
 
 @main.route("/register", methods=["POST"])
 def register():
-    data = request.form.to_dict()
+    print(request.data)
+    if not request.is_json:
+        return jsonify({"error": "Request must be JSON"}), 400
+    print("hello")
+    print(request)
+    data = request.get_json()
+    print(data)
     form = RegistrationForm(data=data)
+    print(form)
+    print(form.validate())
+
     if form.validate():
-        profile_picture_data = request.files.get("profile_picture")
-        if profile_picture_data:
-            return_val = validate_file(profile_picture_data, "image")
-            if return_val:
-                return jsonify(return_val), 400
-            profile_picture = save_file(
-                profile_picture_data, os.path.join("user", "profile_pictures")
+        try:
+            age = int(data["age"]) if data.get("age") else None
+            income = float(data["income"]) if data.get("income") else None
+            print(age, income)
+            user = User(
+                name=form.name.data,
+                email=form.email.data,
+                password=form.password.data,
+                mobile=form.mobile.data,
+                age=form.age.data,
+                income=form.income.data,
+                occupation=form.occupation.data,
+                gender=form.gender.data,
+                marital_status=form.marital_status.data,
             )
-        else:
-            profile_picture = "default_profile_picture.png"
-        user = User(
-            name=form.name.data,
-            email=form.email.data,
-            username=form.username.data,
-            password=form.password.data,
-            profile_picture=profile_picture,
-        )
-        db.session.add(user)
-        db.session.commit()
-        return jsonify({"message": f"Account created for {form.username.data}!"}), 201
+            print(user)
+            db.session.add(user)
+            db.session.commit()
+            return jsonify({"message": f"Account created for {user.name}!"}), 201
+
+        except (ValueError, TypeError) as e:
+            db.session.rollback()
+            return jsonify({"error": "Invalid data format for age or income"}), 400
+        except Exception as e:
+            db.session.rollback()
+            return (
+                jsonify({"error": "An error occurred while creating the account"}),
+                500,
+            )
     else:
-        return (
-            jsonify({"error": form_errors(form.errors)}),
-            400,
-        )
+        return jsonify({"error": form_errors(form.errors)}), 400
 
 
 @main.route("/login", methods=["POST"])
@@ -109,58 +120,39 @@ def login():
     if not request.is_json:
         return jsonify({"error": "Request must be JSON"}), 400
     data = request.get_json()
-    if "role" not in data:
-        return jsonify({"error": "Role is required"}), 400
     form = LoginForm(data=data)
     if form.validate():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter(
+            (User.email == form.identifier.data) | (User.mobile == form.identifier.data)
+        ).first()
+
         if user and bcrypt.check_password_hash(user.password, form.password.data):
-            if user.urole == "user" or user.urole == "librarian":
-                if user.urole != data["role"]:
-                    return (
-                        jsonify({"roleError": "Role is not same."}),
-                        400,
-                    )
-                try:
-                    token = jwt.encode(
-                        {
-                            "userid": user.userid,
-                            "exp": datetime.now(timezone.utc) + timedelta(days=1),
-                        },
-                        current_app.config["SECRET_KEY"],
-                        algorithm="HS256",
-                    )
-                except Exception as e:
-                    return (
-                        jsonify(
-                            {
-                                "error": "An unexpected error has occurred. Please try again. Couldn't generate the token."
-                            }
-                        ),
-                        400,
-                    )
-                user.authenticated = True
-                db.session.commit()
-                return (
-                    jsonify({"message": "Logged in successfully.", "token": token}),
-                    200,
+            try:
+                token = jwt.encode(
+                    {
+                        "userid": user.userid,
+                        "exp": datetime.now(timezone.utc) + timedelta(days=1),
+                    },
+                    current_app.config["SECRET_KEY"],
+                    algorithm="HS256",
                 )
-            else:
+            except Exception as e:
                 return (
                     jsonify(
                         {
-                            "error": "An unexpected error has occurred. Please try again. Role wrong."
+                            "error": "An unexpected error has occurred. Please try again. Couldn't generate the token."
                         }
                     ),
                     400,
                 )
+
+            user.authenticated = True
+            db.session.commit()
+            return jsonify({"message": "Logged in successfully.", "token": token}), 200
         else:
-            return jsonify({"error": "Invalid Username or Password"}), 404
+            return jsonify({"error": "Invalid Email/Phone or Password"}), 404
     else:
-        return (
-            jsonify({"error": form_errors(form.errors)}),
-            400,
-        )
+        return jsonify({"error": form_errors(form.errors)}), 400
 
 
 @main.route("/reset", methods=["POST"])

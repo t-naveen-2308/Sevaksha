@@ -9,13 +9,13 @@ interface Props {
 function Layout({ setTheme }: Props) {
     return (
         <>
-            <header>
+            <header className="mt-6">
                 <Header setTheme={setTheme} />
             </header>
-            <div className="mt-24" style={{ minHeight: "60vh" }}>
+            <div style={{ minHeight: "60vh" }}>
                 <Outlet />
             </div>
-            <footer className="mt-14">
+            <footer className="mt-6">
                 <Footer />
             </footer>
         </>

@@ -1,6 +1,6 @@
 import { textValidationMessages, createAxios } from "../../utils";
 import { FieldError, useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { nameRegex, emailRegex, passwordRegex } from "../../utils/regex";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
@@ -15,10 +15,6 @@ import {
     FaPhone
 } from "react-icons/fa";
 import { toast } from "react-toastify";
-
-interface Props {
-    to: "add" | "edit";
-}
 
 interface User {
     name: string;
@@ -38,45 +34,16 @@ interface User {
     confirmPassword: string;
 }
 
-function AddOrEditUser({ to }: Props) {
+function Register() {
     const {
         register,
         handleSubmit,
-        setValue,
         formState: { errors },
         watch
     } = useForm<User>();
     const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
-
-    if (to === "edit") {
-        useEffect(() => {
-            const fetchUserData = async () => {
-                try {
-                    setIsLoading(true);
-                    const axiosInstance = createAxios("user");
-                    const response = await axiosInstance.get("/user/profile");
-
-                    // Pre-fill all form fields with existing user data
-                    setValue("name", response.data.name);
-                    setValue("email", response.data.email);
-                    setValue("age", response.data.age);
-                    setValue("income", response.data.income);
-                    setValue("occupation", response.data.occupation);
-                    setValue("gender", response.data.gender);
-                    setValue("marital_status", response.data.marital_status);
-                } catch (err) {
-                    console.error("Failed to fetch user data:", err);
-                    setError(err as Error);
-                } finally {
-                    setIsLoading(false);
-                }
-            };
-
-            fetchUserData();
-        }, [setValue]);
-    }
 
     if (error) {
         return (
@@ -105,18 +72,12 @@ function AddOrEditUser({ to }: Props) {
             setIsLoading(true);
             const mainAxios = createAxios("main");
 
-            // Remove confirmPassword before sending to backend
             const { confirmPassword, ...submitData } = data;
+            console.log(data);
 
-            if (to === "add") {
-                await mainAxios.post("/register", submitData);
-                toast.success("Registration successful! Please login.");
-                navigate("/login");
-            } else {
-                await mainAxios.put("/user/account", submitData);
-                toast.success("Profile updated successfully!");
-                navigate("/user/account");
-            }
+            await mainAxios.post("/register", submitData);
+            toast.success("Registration successful! Please login.");
+            navigate("/login");
         } catch (err) {
             console.error("Form submission error:", err);
             toast.error((err as Error).message || "Something went wrong");
@@ -137,7 +98,7 @@ function AddOrEditUser({ to }: Props) {
                     />
                 </div>
                 <h1 className="text-3xl font-bold text-center text-indigo-900">
-                    {to === "add" ? "REGISTER" : "EDIT PROFILE"}
+                    REGISTER
                 </h1>
 
                 <hr className="border-t-1 border-gray-300 mt-4 mb-6" />
@@ -408,42 +369,22 @@ function AddOrEditUser({ to }: Props) {
                                 className="block text-indigo-900 text-lg font-medium mb-2 flex items-center gap-2"
                             >
                                 <FaLock className="text-orange-500" />
-                                {to === "add"
-                                    ? "Create Password"
-                                    : "New Password"}
+                                Create Password
                             </label>
                             <input
                                 type="password"
                                 id="password"
                                 className="w-full text-lg p-3 border-2 rounded-md border-gray-300 focus:border-orange-400 focus:outline-none"
                                 maxLength={60}
-                                placeholder={
-                                    to === "add"
-                                        ? "Create secure password"
-                                        : "Enter new password"
-                                }
+                                placeholder="Create secure password"
                                 {...register(
                                     "password",
-                                    to === "add"
-                                        ? textValidationMessages(
-                                              "Password",
-                                              8,
-                                              60,
-                                              passwordRegex
-                                          )
-                                        : {
-                                              required: false,
-                                              minLength: {
-                                                  value: 8,
-                                                  message:
-                                                      "Password must be at least 8 characters"
-                                              },
-                                              pattern: {
-                                                  value: passwordRegex,
-                                                  message:
-                                                      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
-                                              }
-                                          }
+                                    textValidationMessages(
+                                        "Password",
+                                        8,
+                                        60,
+                                        passwordRegex
+                                    )
                                 )}
                             />
                             {errors.password && (
@@ -467,10 +408,7 @@ function AddOrEditUser({ to }: Props) {
                                 className="w-full text-lg p-3 border-2 rounded-md border-gray-300 focus:border-orange-400 focus:outline-none"
                                 placeholder="Confirm your password"
                                 {...register("confirmPassword", {
-                                    required:
-                                        to === "add"
-                                            ? "Please confirm your password"
-                                            : false,
+                                    required: "Please confirm your password",
                                     validate: (value) =>
                                         !value ||
                                         value === watch("password") ||
@@ -527,31 +465,27 @@ function AddOrEditUser({ to }: Props) {
                                     </svg>
                                     Processing...
                                 </>
-                            ) : to === "add" ? (
-                                "Register"
                             ) : (
-                                "Update Profile"
+                                "Register"
                             )}
                         </button>
                     </div>
 
-                    {to === "add" && (
-                        <div className="mt-8 text-center border-t border-gray-200 pt-6">
-                            <p className="text-gray-600 text-lg">
-                                Already have an account?{" "}
-                                <NavLink
-                                    className="text-orange-500 hover:text-orange-600 font-medium ml-1"
-                                    to="/login"
-                                >
-                                    Login Now
-                                </NavLink>
-                            </p>
-                        </div>
-                    )}
+                    <div className="mt-8 text-center border-t border-gray-200 pt-6">
+                        <p className="text-gray-600 text-lg">
+                            Already have an account?{" "}
+                            <NavLink
+                                className="text-orange-500 hover:text-orange-600 font-medium ml-1"
+                                to="/login"
+                            >
+                                Login Now
+                            </NavLink>
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>
     );
 }
 
-export default AddOrEditUser;
+export default Register;

@@ -9,18 +9,17 @@ class User(db.Model):
     __tablename__ = "user"
     userid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(60), nullable=False)
-    username = db.Column(db.String(32), unique=True, nullable=False)
     email = db.Column(db.String(60), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    profile_picture = db.Column(
-        db.String(20), nullable=False, default="default_profile_picture.png"
-    )
     authenticated = db.Column(db.Boolean, default=False)
     age = db.Column(db.Integer, nullable=True)
     income = db.Column(db.Numeric(10, 2), nullable=True)
     occupation = db.Column(db.String(100), nullable=True)
     gender = db.Column(db.String(10), nullable=True)
     marital_status = db.Column(db.String(20), nullable=True)
+    mobile = db.Column(db.String(10), nullable=False, unique=True)
+    applications = db.relationship("Application", backref="applicant", lazy=True)
+
     __table_args__ = (
         CheckConstraint(
             "gender IN ('Male', 'Female')", name="check_gender_valid_values"
@@ -29,38 +28,35 @@ class User(db.Model):
             "marital_status IN ('Never Married', 'Currently Married', 'Widowed', 'Divorced', 'Separated')",
             name="check_marital_status_valid_values",
         ),
+        CheckConstraint("mobile ~ '^[0-9]{10}$'", name="check_mobile_format"),
     )
 
     def __repr__(self):
-        return f"User('{self.userid}', '{self.name}', '{self.username}', '{self.email}', '{self.password}', '{self.profile_picture}', '{self.authenticated}')"
+        return f"User('{self.userid}', '{self.name}', '{self.email}', '{self.password}', '{self.authenticated}')"
 
     def __init__(
         self,
         name,
-        username,
         email,
         password,
-        profile_picture="default_profile_picture.png",
         authenticated=False,
-        urole="user",
         age=None,
         income=None,
         occupation=None,
         gender=None,
         marital_status=None,
+        mobile=None,
     ):
         self.name = name
         self.email = email
-        self.username = username
         self.password = bcrypt.generate_password_hash(password).decode("utf-8")
-        self.profile_picture = profile_picture
         self.authenticated = authenticated
-        self.urole = urole
         self.age = age
         self.income = income
         self.occupation = occupation
         self.gender = gender
         self.marital_status = marital_status
+        self.mobile = mobile
 
     def get_reset_token(self, expires_sec=1800):
         secret_key = jwt.encode(
@@ -87,18 +83,50 @@ class User(db.Model):
             return None
         return User.query.filter(User.userid == int(data["userid"])).first()
 
+    def generate_otp(self, expires_sec=300):
+        import random
+
+        otp = str(random.randint(100000, 999999))
+
+        otp_token = jwt.encode(
+            {
+                "userid": self.userid,
+                "otp": otp,
+                "exp": datetime.now(timezone.utc) + timedelta(seconds=expires_sec),
+            },
+            current_app.config["SECRET_KEY"],
+            algorithm="HS256",
+        )
+        return otp, otp_token
+
+    @staticmethod
+    def verify_otp(otp_token, provided_otp):
+        try:
+            data = jwt.decode(
+                otp_token,
+                current_app.config["SECRET_KEY"],
+                leeway=timedelta(seconds=10),
+                algorithms=["HS256"],
+                options={"verify_exp": True},
+            )
+            if data["otp"] == provided_otp:
+                return User.query.filter(User.userid == int(data["userid"])).first()
+            return None
+        except:
+            return None
+
     def to_dict(self, include_relationships=[]):
         dt = {
             "userid": self.userid,
             "name": self.name,
             "username": self.username,
             "email": self.email,
-            "profile_picture": self.profile_picture,
             "age": self.age,
             "income": float(self.income) if self.income else None,
             "occupation": self.occupation,
             "gender": self.gender,
             "marital_status": self.marital_status,
+            "mobile": self.mobile,
         }
         return dt
 
@@ -113,7 +141,7 @@ class WelfareScheme(db.Model):
     income_limit = db.Column(db.Numeric(10, 2), nullable=True)
     target_occupation = db.Column(db.String(100), nullable=True)
     gender = db.Column(db.String(10), nullable=True)
-    marital_status = db.Column(db.String(20), nullable=True)
+    marital_stat = db.Column(db.String(20), nullable=True)
     eligibility_criteria = db.Column(db.Text, nullable=True)
     required_documents = db.Column(db.Text, nullable=True)
     scheme_description = db.Column(db.Text, nullable=True)
@@ -128,14 +156,15 @@ class WelfareScheme(db.Model):
         default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc),
     )
+    applications = db.relationship("Application", backref="scheme", lazy=True)
     __table_args__ = (
         CheckConstraint(
             "gender IN ('Male', 'Female', 'Neutral')",
             name="check_gender_valid_values",
         ),
         CheckConstraint(
-            "marital_status IN ('Never Married', 'Currently Married', 'Widowed', 'Divorced', 'Separated')",
-            name="check_marital_status_valid_values",
+            "marital_stat IN ('Never Married', 'Currently Married', 'Widowed', 'Divorced', 'Separated')",
+            name="check_marital_stat_valid_values",
         ),
     )
 
@@ -155,7 +184,7 @@ class WelfareScheme(db.Model):
         language_support=None,
         is_active=True,
         gender=None,
-        marital_status=None,
+        marital_stat=None,
     ):
         self.scheme_name = scheme_name
         self.min_age = min_age
@@ -171,14 +200,14 @@ class WelfareScheme(db.Model):
         self.language_support = language_support
         self.is_active = is_active
         self.gender = gender
-        self.marital_status = marital_status
+        self.marital_stat = marital_stat
 
     def __repr__(self):
         return (
             f"WelfareScheme('{self.scheme_id}', '{self.scheme_name}', "
             f"min_age={self.min_age}, max_age={self.max_age}, income_limit={self.income_limit}, "
             f"target_occupation='{self.target_occupation}', gender='{self.gender}', "
-            f"marital_status='{self.marital_status}', is_active={self.is_active})"
+            f"marital_stat='{self.marital_stat}', is_active={self.is_active})"
         )
 
 
@@ -205,4 +234,46 @@ class BlacklistedToken(db.Model):
             "blacklistedid": self.blacklistedid,
             "token": self.token,
             "expiry": self.expiry.isoformat(),
+        }
+
+
+class Application(db.Model):
+    __tablename__ = "applications"
+
+    application_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.userid"), nullable=False)
+    scheme_id = db.Column(
+        db.Integer, db.ForeignKey("welfare_schemes.scheme_id"), nullable=False
+    )
+    status = db.Column(db.String(20), nullable=False, default="Pending")
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = db.Column(
+        db.DateTime,
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
+    )
+
+    __table_args__ = (
+        CheckConstraint(
+            "status IN ('Pending', 'Approved', 'Rejected')",
+            name="check_application_status",
+        ),
+    )
+
+    def __init__(self, user_id, scheme_id, status="Pending"):
+        self.user_id = user_id
+        self.scheme_id = scheme_id
+        self.status = status
+
+    def __repr__(self):
+        return f"Application('{self.application_id}', user_id='{self.user_id}', scheme_id='{self.scheme_id}', status='{self.status}')"
+
+    def to_dict(self):
+        return {
+            "application_id": self.application_id,
+            "user_id": self.user_id,
+            "scheme_id": self.scheme_id,
+            "status": self.status,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
+            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }

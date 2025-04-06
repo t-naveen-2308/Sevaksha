@@ -3,7 +3,7 @@ import {
     RouterProvider,
     Navigate
 } from "react-router-dom";
-import { Layout, Login, Home, Schemes } from "./components/common";
+import { Layout, Login, Home, Schemes, Register } from "./components/common";
 import {
     AddOrEditUser,
     UserHome,
@@ -38,7 +38,7 @@ function BrowserRouterProvider({ setTheme }: Props) {
                 },
                 {
                     path: "register",
-                    element: <AddOrEditUser to="add" />
+                    element: <Register />
                 },
                 {
                     path: "login",

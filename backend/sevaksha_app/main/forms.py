@@ -3,11 +3,14 @@ from wtforms import (
     PasswordField,
     StringField,
     ValidationError,
+    IntegerField,
+    FloatField,
 )
-from wtforms.validators import DataRequired, Length, EqualTo
+from wtforms.validators import DataRequired, Length
 import re
-from sevaksha_app.models import User
+from sevaksha_app.models import User 
 from wtforms.validators import DataRequired
+
 
 class SearchForm(FlaskForm):
     class Meta:
@@ -31,12 +34,15 @@ class RegistrationForm(FlaskForm):
 
     name = StringField("Name", validators=[DataRequired(), Length(min=3, max=60)])
     email = StringField("Email", validators=[DataRequired()])
-    username = StringField(
-        "Username", validators=[DataRequired(), Length(min=5, max=32)]
-    )
     password = PasswordField(
         "Password", validators=[DataRequired(), Length(min=8, max=60)]
     )
+    mobile = StringField("Mobile", validators=[DataRequired(), Length(min=10, max=10)])
+    age = IntegerField("Age")
+    income = FloatField("Income")
+    occupation = StringField("Occupation", validators=[Length(max=100)])
+    gender = StringField("Gender")
+    marital_status = StringField("Marital Status")
 
     def validate_name(self, name):
         pattern = r"^[A-Za-z\s,'.]{3,60}$"
@@ -55,18 +61,6 @@ class RegistrationForm(FlaskForm):
                 "That email already exists. Please choose a different email."
             )
 
-    def validate_username(self, username):
-        pattern = r"^[a-z][a-z0-9_]{4,31}$"
-        if not re.match(pattern, username.data):
-            raise ValidationError(
-                "Username can only contain lowercase letters, digits and underscore."
-            )
-        user = User.query.filter_by(username=username.data).first()
-        if user:
-            raise ValidationError(
-                "That username is already taken. Please choose different username."
-            )
-
     def validate_password(self, password):
         pattern = (
             r"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,60}$"
@@ -76,17 +70,40 @@ class RegistrationForm(FlaskForm):
                 "Password must contain at least eight characters, one uppercase letter, one lowercase letter, one number and one special character."
             )
 
+    def validate_mobile(self, mobile):
+        pattern = r"^[0-9]{10}$"
+        if not re.match(pattern, mobile.data):
+            raise ValidationError("Mobile number must be 10 digits.")
+        user = User.query.filter_by(mobile=mobile.data).first()
+        if user:
+            raise ValidationError("That mobile number is already registered.")
+
+    def validate_gender(self, gender):
+        if gender.data and gender.data not in ["Male", "Female"]:
+            raise ValidationError("Gender must be either Male or Female.")
+
+    def validate_marital_status(self, marital_status):
+        valid_statuses = [
+            "Never Married",
+            "Currently Married",
+            "Widowed",
+            "Divorced",
+            "Separated",
+        ]
+        if marital_status.data and marital_status.data not in valid_statuses:
+            raise ValidationError(
+                f"Marital status must be one of: {', '.join(valid_statuses)}"
+            )
+
 
 class LoginForm(FlaskForm):
     class Meta:
         csrf = False
 
-    username = StringField(
-        "Username", validators=[DataRequired(), Length(min=5, max=32)]
+    identifier = StringField(
+        "Email or Phone", validators=[DataRequired(), Length(min=3, max=60)]
     )
-    password = PasswordField(
-        "Password", validators=[DataRequired(), Length(min=8, max=60)]
-    )
+    password = PasswordField("Password", validators=[DataRequired()])
 
 
 class ResetRequestForm(FlaskForm):
