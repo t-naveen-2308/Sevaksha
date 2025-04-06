@@ -9,6 +9,7 @@ function RedirectIfNotAuthenticated({
     isAuthenticated,
     component
 }: Props) {
+    console.log(isAuthenticated);
     return (
         <>
             {true ? (

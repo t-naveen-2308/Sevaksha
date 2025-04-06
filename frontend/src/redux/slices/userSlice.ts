@@ -5,8 +5,8 @@ export const userPromise = createAsyncThunk<Partial<User>, string>(
     "user-data",
     async (token, thunkApi) => {
         try {
-            const commonAxios = createAxios("common", token);
-            const res = await commonAxios.get("/");
+            const mainAxios = createAxios("main", token);
+            const res = await mainAxios.get("/");
             const user: Partial<User> = res.data;
             console.log(user);
             return user;
@@ -39,6 +39,7 @@ export const userSlice = createSlice({
             state.user = null;
             state.isPending = false;
             state.errMessage = "";
+            console.log(action);
         }
     },
     extraReducers: (builder) => {
@@ -46,6 +47,7 @@ export const userSlice = createSlice({
             .addCase(userPromise.pending, (state, action) => {
                 state.isPending = true;
                 state.errMessage = "";
+            console.log(action);
             })
             .addCase(userPromise.fulfilled, (state, action) => {
                 state.user = action.payload;

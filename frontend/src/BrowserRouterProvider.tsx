@@ -15,18 +15,14 @@ import {
 import { RedirectIfNotAuthenticated } from "./utils";
 import { useSelector } from "react-redux";
 
-interface Props {
-    setTheme: React.Dispatch<React.SetStateAction<string>>;
-}
-
-function BrowserRouterProvider({ setTheme }: Props) {
+function BrowserRouterProvider() {
     const user = useSelector((state: RootState) => state.user);
     const isAuthenticated = user !== null;
 
     const BrowserRouter = createBrowserRouter([
         {
             path: "/",
-            element: <Layout setTheme={setTheme} />,
+            element: <Layout />,
             children: [
                 {
                     path: "home",
@@ -54,7 +50,7 @@ function BrowserRouterProvider({ setTheme }: Props) {
             path: "/user",
             element: (
                 <RedirectIfNotAuthenticated
-                    component={<UserLayout setTheme={setTheme} />}
+                    component={<UserLayout />}
                     isAuthenticated={isAuthenticated}
                 />
             ),

@@ -32,6 +32,7 @@ function Login() {
             const mainAxios = createAxios("main");
             const res = await mainAxios.post("/login", data);
             const { user, token } = res.data;
+            console.log(user);
             localStorage.setItem("token", token);
             const actionObj = userPromise(token);
             dispatch(actionObj);
